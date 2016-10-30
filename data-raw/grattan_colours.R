@@ -38,4 +38,4 @@ devtools::use_data(Orange,
                    pal.1, pal.2, pal.2dark, pal.3, pal.4, pal.5, pal.6, pal.7, pal.8, pal.9, 
                    grey.pal, 
                    
-                   internal = FALSE)
+                   internal = FALSE, overwrite = TRUE)

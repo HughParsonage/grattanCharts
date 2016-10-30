@@ -2,8 +2,8 @@
 #' 
 #' Colours, charts, and other common quant tasks
 #' 
-#' @name grattan-package
-#' @aliases grattan
+#' @name grattanCharts-package
+#' @aliases grattanCharts
 #' @docType package
 #' @title Colours, charts, and other common quant tasks
 #' @author \email{hugh.parsonage+grattanpackage@@grattan.edu.au}

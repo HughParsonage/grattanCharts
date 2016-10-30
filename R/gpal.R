@@ -9,8 +9,7 @@
 #' @return A vector of HTML colours to be used.
 
 gpal <- function(n, dark = TRUE, reverse = FALSE){
-  stopifnot(requireNamespace("grattan", quietly = TRUE))
-  grattan.palette <- list(grattan::pal.1, grattan::pal.2dark, grattan::pal.3, grattan::pal.4, grattan::pal.5, grattan::pal.6)
+  grattan.palette <- list(pal.1, pal.2dark, pal.3, pal.4, pal.5, pal.6)
   
   if(n > 6){
     if(n > 9){
@@ -20,13 +19,13 @@ gpal <- function(n, dark = TRUE, reverse = FALSE){
       else 
         return(rev(gpalx(n)))
     } else {
-      grattan.palette <- list(grattan::pal.1, grattan::pal.2, grattan::pal.3, grattan::pal.4, grattan::pal.5, grattan::pal.6, grattan::pal.7, grattan::pal.8, grattan::pal.9)
+      grattan.palette <- list(pal.1, pal.2, pal.3, pal.4, pal.5, pal.6, pal.7, pal.8, pal.9)
       message("I'm going off-piste: The Palette Of Nine is thine. May John have mercy on your soul.")
     }
   }
   if(!dark) {
     if (n == 2){
-      out <- grattan::pal.2
+      out <- pal.2
     } else {
       warning("no light option for palette ", n)
       out <- grattan.palette[[n]]

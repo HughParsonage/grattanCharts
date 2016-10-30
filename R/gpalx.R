@@ -7,5 +7,5 @@
 #' @export
 
 gpalx <- function(n){
-  grDevices::colorRampPalette(colors = grattan::pal.6)(n)
+  grDevices::colorRampPalette(colors = pal.6)(n)
 }

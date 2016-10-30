@@ -1,14 +1,9 @@
-Package: grattan
+Package: grattanCharts
 Type: Package
-Title: Create charts in the style of the Grattan Insitute, Melbourne; perform
-    common quantitative tasks for Australian policy analysts
-Version: 0.3.2.1
-Date: 2016-09-05
-Authors@R: c(person("Hugh", "Parsonage", role = c("aut", "cre"), email = "hugh.parsonage+grattanPackage@grattaninstitute.edu.au"),
-              person("Tim", "Cameron", role = "aut"),
-              person("Brendan", "Coates", role = "aut"), 
-              person("William", "Young", role = "aut"), 
-              person("Ittima", "Cherastidtham", role = "dtc"))
+Title: Create charts in the style of the Grattan Insitute, Melbourne
+Version: 0.1.0.1
+Date: 2016-10-30
+Authors@R: c(person("Hugh", "Parsonage", role = c("aut", "cre"), email = "hugh.parsonage+grattanPackage@grattaninstitute.edu.au"))
 Maintainer: Who to complain to <hugh.parsonage@grattaninstitute.edu.au>
 Description: The original goal of this package was to simply hold the colours of the Grattan palette. 
 Depends: R (>= 2.10)
@@ -16,27 +11,13 @@ License: GPL-2
 Imports:
     grDevices,
     ggplot2 (>= 2.0.0),
-    data.table,
+    scales,
     dplyr,
-    rsdmx,
-    forecast,
-    lubridate,
-    assertthat,
     magrittr,
-    Rcpp (>= 0.12.3), 
     knitr, 
     readr, 
-    zoo, 
-    lazyeval, 
-    purrr, 
     xtable
-LinkingTo: Rcpp
 RoxygenNote: 5.0.1
-Suggests: testthat, taxstats,
-    rmarkdown, 
-    dtplyr,
-    scales, 
-    broom, 
-    survey
+Suggests: data.table
 LazyData: true
 VignetteBuilder: knitr

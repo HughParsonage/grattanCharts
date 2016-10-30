@@ -14,6 +14,8 @@
 #' If \code{hedges} is supplied, a phrase including the next fraction above or below it as the phrase dictates.
 #' 
 #' @export Grattan_frac grattan_frac
+#' @importFrom magrittr %>%
+#' @importFrom dplyr if_else
 
 
 Grattan_frac <- function(number, hedges = c("Almost", "Over")){

@@ -110,7 +110,7 @@ grattan_waterfall <- function(.data = NULL,
   p <- ggplot2::ggplot(data.frame(x = labels,
                                   y = values), ggplot2::aes_string(x = "x", y = "y")) + 
     ggplot2::geom_blank() + 
-    grattan::theme_hugh(base_family = theme_text_family) +
+    theme_hugh(base_family = theme_text_family) +
     ggplot2::theme(axis.title = ggplot2::element_blank())
   } else {
     p <- ggplot2::ggplot(data.frame(x = c(labels, total_axis_text),
@@ -118,7 +118,7 @@ grattan_waterfall <- function(.data = NULL,
                                     ), 
                                     ggplot2::aes_string(x = "x", y = "y")) + 
       ggplot2::geom_blank() + 
-      grattan::theme_hugh(base_family = theme_text_family) +
+      theme_hugh(base_family = theme_text_family) +
       ggplot2::theme(axis.title = ggplot2::element_blank())
   }
   

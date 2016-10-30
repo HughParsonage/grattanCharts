@@ -9,8 +9,12 @@
   # CRAN Note avoidance
   if(getRversion() >= "2.15.1") 
     utils::globalVariables(
+      
+      c("DarkOrange", "Orange", "OrangeBackground", "pal.1", "pal.2", "pal.2dark", "pal.3", "pal.4",
+        "pal.5", "pal.6", "pal.7", "pal.8", "pal.9",
+      
       # sample file names from taxstats
-      c("Ind", "Gender", "age_range", "Occ_code", "Partner_status", 
+        "Ind", "Gender", "age_range", "Occ_code", "Partner_status", 
         "Region", "Lodgment_method", "PHI_Ind", "Sw_amt", "Alow_ben_amt", 
         "ETP_txbl_amt", "Grs_int_amt", "Aust_govt_pnsn_allw_amt", "Unfranked_Div_amt", 
         "Frk_Div_amt", "Dividends_franking_cr_amt", "Net_rent_amt", "Gross_rent_amt", 

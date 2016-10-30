@@ -48,8 +48,8 @@ theme_grattan_OrangeBackground <- function(base_size = 24, base_family = "") {
       panel.grid.minor =  element_blank(),
       
       # Modified inheritance structure of rect element
-      panel.background = element_rect(fill = grattan::OrangeBackground),
-      plot.background = element_rect(fill = grattan::OrangeBackground),
+      panel.background = element_rect(fill = OrangeBackground),
+      plot.background = element_rect(fill = OrangeBackground),
       legend.key =        element_rect(fill='white'),
       
       # Modifiying legend.position
