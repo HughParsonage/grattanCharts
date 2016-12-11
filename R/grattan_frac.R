@@ -16,12 +16,15 @@
 #' @export Grattan_frac grattan_frac
 #' @importFrom magrittr %>%
 #' @importFrom dplyr if_else
+#' @import data.table
 
 
 Grattan_frac <- function(number, hedges = c("Almost", "Over")){
   stopifnot(length(number) == 1L, abs(number) <= 1)
   
   val <- Txt <- txt <- NULL
+  
+  .avbl_fractions <- avbl_fractions %>% as.data.table
   
   if (is.null(hedges)){
     .avbl_fractions %>%

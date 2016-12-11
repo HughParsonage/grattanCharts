@@ -13,11 +13,12 @@ Imports:
     ggplot2 (>= 2.0.0),
     scales,
     dplyr,
+    data.table,
     magrittr,
     knitr, 
     readr, 
     xtable
 RoxygenNote: 5.0.1
-Suggests: data.table
 LazyData: true
 VignetteBuilder: knitr
+Suggests: testthat
