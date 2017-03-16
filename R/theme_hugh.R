@@ -35,11 +35,12 @@ if (isTRUE(getOption("grattan.bigplot"))) {
         axis.text =         element_text(),
         axis.line =         element_line(color = "black", size = 1),
         axis.line.x  = element_line(color = "black", size = 1), 
-        axis.line.y  = element_line(color = "black", size = 1),
+        axis.line.y  = element_blank(),
         axis.ticks.length = grid::unit(0.3, "lines"),
         
         # Modified inheritance structure of line element
-        axis.ticks =        element_line(color = "black"),
+        axis.ticks.x =        element_line(color = "black"),
+        axis.ticks.y =        element_blank(),
         panel.grid.major =  element_line(),
         panel.grid.major.x = element_blank(),
         panel.grid.major.y = element_line(),
