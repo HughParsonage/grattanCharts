@@ -12,4 +12,3 @@ theme_grattan(...)
 \description{
 theme_grattan
 }
-

@@ -15,4 +15,3 @@ clean_bibtex_output_from_endnote(filename,
 \description{
 endnote_to_bibtex
 }
-

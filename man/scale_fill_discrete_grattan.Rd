@@ -17,4 +17,3 @@ scale fill scale for grattan (uses the palette)
 \details{
 A function controlling the colors.
 }
-

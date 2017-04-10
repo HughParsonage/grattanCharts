@@ -23,4 +23,3 @@ A complement to \code{\link{texNum}}.
 
 These functions are all of the form \code{grattan_*} to avoid namespace clashes.
 }
-

@@ -22,4 +22,3 @@ Automatic palette adjustment
 \author{
 Hugh Parsonage
 }
-

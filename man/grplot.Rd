@@ -14,4 +14,3 @@ grplot(..., reverse = FALSE)
 \description{
 Attempt to harness ggplot but set as much to default as possible
 }
-

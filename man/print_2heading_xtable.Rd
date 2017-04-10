@@ -48,4 +48,3 @@ print_2heading_xtable(example_df, separator = "__", xtable.dots = list(caption =
 \author{
 Hugh Parsonage
 }
-

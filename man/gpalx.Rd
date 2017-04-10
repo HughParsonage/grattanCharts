@@ -18,4 +18,3 @@ The extended colour palette
 \details{
 This function interpolates the original Grattan palette for a large (possibly infinite) number of factors.
 }
-

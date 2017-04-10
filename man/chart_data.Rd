@@ -20,4 +20,3 @@ convenience function for knitr chunks
 \note{
 Use this in a knitr chunk that produces a chart to get the chart data.
 }
-

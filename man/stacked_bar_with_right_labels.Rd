@@ -67,4 +67,3 @@ stacked_bar_with_right_labels(dat)
 
 
 }
-

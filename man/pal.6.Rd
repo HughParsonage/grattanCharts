@@ -8,4 +8,3 @@
 pal.6
 }
 \keyword{datasets}
-

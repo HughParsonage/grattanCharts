@@ -17,4 +17,3 @@ dollar scales
 \details{
 Makes negative numbers appear as \eqn{-\$10,000} instead of \eqn{\$-10,000} in \code{scales::dollar}.
 }
-

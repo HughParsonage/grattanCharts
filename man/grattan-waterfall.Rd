@@ -69,4 +69,3 @@ grattan_waterfall(.data = NULL, values, labels, rect_text_labels = values,
 \description{
 Create waterfall charts
 }
-

@@ -14,4 +14,3 @@ theme_grattan_OrangeBackground(base_size = 24, base_family = "")
 \description{
 A theme for use with ggplots when the background needs to be Orange
 }
-

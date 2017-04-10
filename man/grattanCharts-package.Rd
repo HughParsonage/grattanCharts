@@ -2,8 +2,8 @@
 % Please edit documentation in R/grattanCharts-package.R
 \docType{package}
 \name{grattanCharts-package}
-\alias{grattanCharts}
 \alias{grattanCharts-package}
+\alias{grattanCharts}
 \title{Colours, charts, and other common quant tasks}
 \description{
 Grattan package
@@ -15,4 +15,3 @@ Colours, charts, and other common quant tasks
 \email{hugh.parsonage+grattanpackage@grattan.edu.au}
 }
 \keyword{package}
-

@@ -29,4 +29,3 @@ texNum(500e3)
 texNum(500e3 - 1, pre.phrase = c("almost", "over"))
 texNum(500e6)
 }
-

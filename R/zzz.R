@@ -60,7 +60,11 @@
     "Count", 
     "Sum"
     
-    , 
+    , ".current.time",
+    "fig_width",
+    "out_width",
+    "fig_height",
+    "out_height",
     
     # dput(unique(c(names(grattan:::medicare_tbl), names(grattan:::sapto_tbl), names(grattan:::cgt_expenditures))))
     c("fy_year", "sato", "pto", "sapto", "family_status", "lower_threshold", 
@@ -73,3 +77,5 @@
     )
   invisible()
 }
+
+

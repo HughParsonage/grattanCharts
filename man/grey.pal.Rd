@@ -8,4 +8,3 @@
 grey.pal
 }
 \keyword{datasets}
-
