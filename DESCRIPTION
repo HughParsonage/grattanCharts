@@ -1,16 +1,16 @@
 Package: grattanCharts
 Type: Package
 Title: Create charts in the style of the Grattan Insitute, Melbourne
-Version: 0.1.0.1
-Date: 2016-10-30
+Version: 0.2.0.1
+Date: 2017-06-12
 Authors@R: c(person("Hugh", "Parsonage", role = c("aut", "cre"), email = "hugh.parsonage+grattanPackage@grattaninstitute.edu.au"))
-Maintainer: Who to complain to <hugh.parsonage@grattaninstitute.edu.au>
-Description: The original goal of this package was to simply hold the colours of the Grattan palette. 
+Maintainer: Hugh Parsonage <hugh.parsonage@grattaninstitute.edu.au>
+Description: The original goal of this package was to simply hold the colours of the Grattan palette. Includes additional useful charting mechanisms.
 Depends: R (>= 2.10)
 License: GPL-2
 Imports:
     grDevices,
-    ggplot2 (>= 2.0.0),
+    ggplot2 (>= 2.2.0),
     scales,
     dplyr,
     data.table,
