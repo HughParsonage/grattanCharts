@@ -72,22 +72,21 @@ stacked_bar_with_right_labels <- function(.data,
   
   .plot.data <- 
     .data %>%
+    as.data.table %>%
     # our label should only appear at the last x
-    dplyr::mutate(text.label = if_else(x == max(x), 
-                                       paste0(paste0(rep(" ", extra_left_spaces), collapse = ""), 
-                                              gsub("\n", 
-                                                   # Add extra white space (push to right margin)
-                                                   paste0("\n", paste0(rep(" ", extra_left_spaces), collapse = "")),
-                                                   as.character(fill), 
-                                                   fixed = TRUE)),
-                                       NA_character_)) %>%
+    .[, text.label := if_else(x == max(x), 
+                              paste0(paste0(rep(" ", extra_left_spaces), collapse = ""), 
+                                     gsub("\n", 
+                                          # Add extra white space (push to right margin)
+                                          paste0("\n", paste0(rep(" ", extra_left_spaces), collapse = "")),
+                                          as.character(fill), 
+                                          fixed = TRUE)),
+                              NA_character_)] %>%
     # it should be as high as the corresponding bar:
     # all the way up the previous, then half of the corresponding height
-    dplyr::arrange(dplyr::desc(fill)) %>%
-    dplyr::group_by(x) %>%
-    dplyr::mutate(text.y = -y/2 + cumsum(y) + nudge_up) %>%
-    dplyr::ungroup(.) %>%
-    dplyr::mutate(text.x = max(as.numeric(.data$x)) + nudge_right)
+    setorder(-fill) %>%
+    .[, text.y := -y/2 + cumsum(y) + nudge_up, by = x] %>%
+    .[, text.x := max(as.numeric(.data$x)) + nudge_right]
   
   
   label_max_width <- 
