@@ -83,7 +83,7 @@ stacked_bar_with_right_labels <- function(.data,
                                        NA_character_)) %>%
     # it should be as high as the corresponding bar:
     # all the way up the previous, then half of the corresponding height
-    dplyr::arrange(fill) %>%
+    dplyr::arrange(dplyr::desc(fill)) %>%
     dplyr::group_by(x) %>%
     dplyr::mutate(text.y = -y/2 + cumsum(y) + nudge_up) %>%
     dplyr::ungroup(.) %>%
