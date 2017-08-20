@@ -13,7 +13,7 @@ grattan_waterfall(.data = NULL, values, labels, rect_text_labels = values,
   total_rect_text_color = "white", fill_colours = gpalx(length(values)),
   fill_by_sign = TRUE, dark = FALSE, rect_width = 0.7,
   rect_border = NA_character_, draw_lines = TRUE,
-  lines_anchors = c("centre", "centre"), linetype = "dashed",
+  lines_anchors = c("right", "left"), linetype = "dashed",
   draw_axis.x = "behind", x_axis_labels = TRUE, theme_text_family = "",
   print_plot = TRUE, ggplot_object_name = "mywaterfall")
 }
@@ -54,11 +54,13 @@ grattan_waterfall(.data = NULL, values, labels, rect_text_labels = values,
 
 \item{draw_lines}{(logical) should lines be drawn between successive rectangles}
 
-\item{lines_anchors}{a character vector of length two specifying the horizontal placement of the drawn lines relative to the preceding and successive rectangles, respectively}
+\item{lines_anchors}{a character vector of length two specifying the horizontal placement (\code{left}, \code{centre}, \code{right}) of the drawn lines relative to the preceding and successive rectangles, respectively.}
 
 \item{linetype}{the linetype for the draw_lines}
 
 \item{draw_axis.x}{(character) one of "none", "behind", "front" whether to draw an x.axis line and whether to draw it behind or in front of the rectangles, default is behind}
+
+\item{x_axis_labels}{Whether or not to draw x-axis labels.}
 
 \item{theme_text_family}{(character) Passed to the \code{text} argument in \code{ggplot2::theme}.}
 

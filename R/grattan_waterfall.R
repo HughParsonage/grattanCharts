@@ -20,11 +20,14 @@
 #' @param rect_border the border around each rectangle. Choose NA if no border is desired.
 #' @param draw_lines (logical) should lines be drawn between successive rectangles
 #' @param linetype the linetype for the draw_lines
-#' @param lines_anchors a character vector of length two specifying the horizontal placement of the drawn lines relative to the preceding and successive rectangles, respectively
+#' @param lines_anchors a character vector of length two specifying the horizontal placement (\code{left}, \code{centre}, \code{right}) of the drawn lines relative to the preceding and successive rectangles, respectively. 
 #' @param draw_axis.x (character) one of "none", "behind", "front" whether to draw an x.axis line and whether to draw it behind or in front of the rectangles, default is behind
+#' @param x_axis_labels Whether or not to draw x-axis labels. 
 #' @param theme_text_family (character) Passed to the \code{text} argument in \code{ggplot2::theme}.
 #' @param print_plot (logical) Whether or not the plot should be printed. By default, \code{TRUE}, which means it cannot be assigned.
 #' @param ggplot_object_name (character) A quoted valid object name to which ggplot layers may be addded after the function has run. Ignored if \code{print} is \code{FALSE}.
+#' @examples 
+#' grattan_waterfall(values = round(rnorm(5), 2), labels = LETTERS[1:5])
 #' @export
 
 
@@ -43,37 +46,38 @@ grattan_waterfall <- function(.data = NULL,
                               fill_by_sign = TRUE,
                               dark = FALSE,
                               rect_width = 0.7,
-                              rect_border = "black",
+                              rect_border = NA_character_,
                               draw_lines = TRUE,
-                              lines_anchors = c("centre", "centre"),
+                              lines_anchors = c("right", "left"),
                               linetype = "dashed",
                               draw_axis.x = "behind",
+                              x_axis_labels = TRUE,
                               theme_text_family = "", 
                               print_plot = TRUE,
                               ggplot_object_name = "mywaterfall"){
   if(!is.null(.data)){
     if(ncol(.data) == 2 && 
        sum(
-         c("character" %in% sapply(.data, class), 
-           "factor"    %in% sapply(.data, class), 
-           "numeric"   %in% sapply(.data, class))
+         c("character" %in% vapply(.data, class, character(1)), 
+           "factor"    %in% vapply(.data, class, character(1)), 
+           "numeric"   %in% vapply(.data, class, character(1)))
            ) == 2){
-      .data_values <- .data[ ,which(sapply(.data, class) == "numeric")]
-      .data_labels <- .data[ ,which(sapply(.data, class) != "numeric")]
+      .data_values <- .data[ ,which(vapply(.data, class, character(1)) == "numeric")]
+      .data_labels <- .data[ ,which(vapply(.data, class, character(1)) != "numeric")]
     } else {
       stop(".data should have two columns, one numeric, the other character or factor")
     }
-    if(!missing(values) && !missing(labels))
+    if(!missing(values) && !missing(labels)) {
       warning(".data and values and labels supplied, .data ignored")
-    else {
+    } else {
       values <- .data_values
       labels <- as.character(.data_labels)
     }
   }
   
-  if(!(length(values) == length(labels) && 
-       length(labels) == length(fill_colours) && 
-       length(values) == length(rect_text_labels)))
+  if(length(values) != length(labels) ||
+     length(labels) != length(fill_colours) ||
+     length(values) != length(rect_text_labels))
     stop("values, labels, fill_colours, and rect_text_labels must all have same length")
   
   if(rect_width > 1)
@@ -81,13 +85,13 @@ grattan_waterfall <- function(.data = NULL,
   
   number_of_rectangles <- length(values)
   north_edge <- cumsum(values)
-  south_edge <- c(0,cumsum(values)[-length(values)])
+  south_edge <- c(0, cumsum(values)[-length(values)])
   
   # fill by sign means rectangles' fill colour is given by whether they are going up or down
   if(fill_by_sign)
     fill_colours <- if_else(values >= 0, 
-                            gpal(2, dark=dark)[2], 
-                            gpal(2, dark=dark)[1])
+                            gpal(2, dark = dark)[2], 
+                            gpal(2, dark = dark)[1])
   
   if (!(grepl("^[lrc]", lines_anchors[1]) && grepl("^[lrc]", lines_anchors[2])))  # left right center
     stop("lines_anchors must be a pair of any of the following: left, right, centre")
@@ -108,7 +112,8 @@ grattan_waterfall <- function(.data = NULL,
   
   if (!calc_total){
   p <- ggplot2::ggplot(data.frame(x = labels,
-                                  y = values), ggplot2::aes_string(x = "x", y = "y")) + 
+                                  y = values),
+                       ggplot2::aes_string(x = "x", y = "y")) + 
     ggplot2::geom_blank() + 
     theme_hugh(base_family = theme_text_family) +
     ggplot2::theme(axis.title = ggplot2::element_blank())
@@ -204,6 +209,10 @@ grattan_waterfall <- function(.data = NULL,
     }
   } else {
     p <- p + ggplot2::scale_x_discrete(labels = labels)
+  }
+  
+  if (!x_axis_labels) {
+    p <- p + ggplot2::theme(axis.text.x = ggplot2::element_blank())
   }
   
   if (grepl("front", draw_axis.x)){
