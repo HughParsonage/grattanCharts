@@ -9,7 +9,7 @@ gpal(n, dark = TRUE, reverse = FALSE)
 \arguments{
 \item{n}{The number of variables/factors over which the palette is to paint.}
 
-\item{dark}{Should a dark palette be used? (Only available for n=2.)}
+\item{dark}{Should a dark palette be used? (Only available for n = 2.)}
 
 \item{reverse}{(logical) Option to reverse the palette.}
 }
@@ -17,7 +17,42 @@ gpal(n, dark = TRUE, reverse = FALSE)
 A vector of HTML colours to be used.
 }
 \description{
-Automatic palette adjustment
+The grattan palette from darkest to lightest given a number of colours.
+}
+\examples{
+library(ggplot2)
+dat <- data.frame(i = 1:6,
+                  xmin = 1:6,
+                  xmax = 1:6 + 1,
+                  ymin = 0,
+                  ymax = 1,
+                  fill = gpal(6),
+                  stringsAsFactors = FALSE) 
+ggplot(dat, aes(xmin = xmin, ymin = ymin,
+                xmax = xmax, ymax = ymax,
+                fill = fill)) +
+  geom_rect() +
+  geom_text(aes(x = (xmin + xmax) / 2,
+                y = (ymin + ymax) / 2,
+                label = i)) +
+  scale_fill_identity()
+  
+# Extended palette available up to 9 colours.
+dat <- data.frame(i = 1:9,
+                  xmin = 1:9,
+                  xmax = 1:9 + 1,
+                  ymin = 0,
+                  ymax = 1,
+                  fill = gpal(9),
+                  stringsAsFactors = FALSE) 
+ggplot(dat, aes(xmin = xmin, ymin = ymin,
+                xmax = xmax, ymax = ymax,
+                fill = fill)) +
+  geom_rect() +
+  geom_text(aes(x = (xmin + xmax) / 2,
+                y = (ymin + ymax) / 2,
+                label = i)) +
+  scale_fill_identity()
 }
 \author{
 Hugh Parsonage

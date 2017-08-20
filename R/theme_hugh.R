@@ -57,7 +57,7 @@ theme_hugh <- function(base_size = 23, base_family = "") {
       legend.position = 'none',
       legend.background = element_rect(fill = NA, colour = NA),
       legend.title = element_text(face = "bold"),
-      strip.background = element_rect(fill = "white"),
+      strip.background = element_blank(),
       
       complete = TRUE
     )

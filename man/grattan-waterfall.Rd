@@ -12,10 +12,10 @@ grattan_waterfall(.data = NULL, values, labels, rect_text_labels = values,
   total_rect_text = sum(values), total_rect_color = gpal(6)[1],
   total_rect_text_color = "white", fill_colours = gpalx(length(values)),
   fill_by_sign = TRUE, dark = FALSE, rect_width = 0.7,
-  rect_border = "black", draw_lines = TRUE, lines_anchors = c("centre",
-  "centre"), linetype = "dashed", draw_axis.x = "behind",
-  theme_text_family = "", print_plot = TRUE,
-  ggplot_object_name = "mywaterfall")
+  rect_border = NA_character_, draw_lines = TRUE,
+  lines_anchors = c("centre", "centre"), linetype = "dashed",
+  draw_axis.x = "behind", x_axis_labels = TRUE, theme_text_family = "",
+  print_plot = TRUE, ggplot_object_name = "mywaterfall")
 }
 \arguments{
 \item{.data}{a data frame containing two columns, one with the values, the other with the labels}
@@ -68,4 +68,7 @@ grattan_waterfall(.data = NULL, values, labels, rect_text_labels = values,
 }
 \description{
 Create waterfall charts
+}
+\examples{
+grattan_waterfall(values = round(rnorm(5), 2), labels = LETTERS[1:5])
 }
