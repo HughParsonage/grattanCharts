@@ -8,7 +8,7 @@
 
 grplot <- function(..., reverse = FALSE){
   if (isTRUE(getOption("grattan.bigplot"))) {
-    theme_grattan <- function() theme_hugh(base_size = 23)
+    theme_grattan <- function() theme_hugh(base_size = 18)
   } else {
     theme_grattan <- function() theme_hugh(base_size = 10)
   }

@@ -9,7 +9,7 @@
 #' @export
 
 setup_knitr_for_grattex <- function(chunktimings.txt = "CHUNKTIMINGS.txt",
-                                    bundle_chart_data,
+                                    bundle_chart_data = FALSE,
                                     theGlobalEnv = .GlobalEnv,
                                     error = FALSE){
   if (isTRUE(getOption('knitr.in.progress'))){
