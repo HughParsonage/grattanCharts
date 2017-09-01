@@ -66,6 +66,10 @@
     "fig_height",
     "out_height",
     
+    "Melbourne_coastline",
+    "Sydney_coastline", 
+    "theGrey", 
+    
     # dput(unique(c(names(grattan:::medicare_tbl), names(grattan:::sapto_tbl), names(grattan:::cgt_expenditures))))
     c("fy_year", "sato", "pto", "sapto", "family_status", "lower_threshold", 
       "family_income", 
