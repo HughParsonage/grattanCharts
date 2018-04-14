@@ -11,9 +11,9 @@
 chart_data <- function(.data, warnOnError = FALSE){
   tryCatch({
     current_chunk_label <- knitr::opts_current$get(name = "label")
-    if (!is.null(current_chunk_label)){  # i.e. we are knitting
+    if (!is.null(current_chunk_label)) {  # i.e. we are knitting
       atlas <- gsub("/$", "", knitr::opts_chunk$get(name = "fig.path"))
-      readr::write_csv(x = .data, path = file.path(atlas, paste0(current_chunk_label, ".csv")))
+      fwrite(x = .data, file = file.path(atlas, paste0(current_chunk_label, ".csv")))
     } else {
       invisible(.data)
     }}, 

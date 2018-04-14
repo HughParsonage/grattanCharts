@@ -30,7 +30,7 @@ setup_knitr_for_grattex <- function(chunktimings.txt = "CHUNKTIMINGS.txt",
             paste0(.duration, 
                    "\t", 
                    knitr::opts_current$get(name = "label")),
-            file = "CHUNKTIMINGS.txt",
+            file = chunktimings.txt,
             ncolumns = 1,
             append = TRUE)
       }
