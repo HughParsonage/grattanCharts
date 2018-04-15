@@ -2,6 +2,7 @@
 #' @description Writes a table as a LaTeX \code{tabular} where groups are separated by a vertical space and repeated entries of the same entry are omitted.
 #' @param dt A \code{data.table} or coercible to such.
 #' @param group_by The columns that identify groups. If \code{NULL}, the default, any columns with duplicate entries are used.
+#' @param align The character vector passed to \code{xtable}.
 #' @param cast_cols Which elements should be casted to form grouped \code{xtable}s?
 #' @param vertical_gap A nominal numeric value for the narrowest vertical gap.
 #' @param vertical_gap_units The units of \code{vertical_gap}.
@@ -97,16 +98,16 @@ print_grouped_xtable <- function(dt,
   for (group_j in rev(seq_along(group_by))) {
     
     if (group_j == 1L) {
-      dt[duplicated(dt, by = group_by[group_j]), "_VSPACE" := `_VSPACE` - 1L]
-      dt[duplicated(dt, by = group_by[group_j]), (group_by[group_j]) := .na()]
+      dt[duplicated(dt, by = group_by[group_j]), "_VSPACE" := eval(parse(text = "`_VSPACE`")) - 1L]
+      dt[duplicated(dt, by = group_by[group_j]), (group_by[group_j]) := NA]
     } else {
       dt[,
-         (group_by[group_j]) := replace(.SD[[1]], duplicated(.SD), .na()),
+         (group_by[group_j]) := replace(.SD[[1]], duplicated(.SD), NA),
          by = c(group_by[seq_len(group_j - 1L)]), 
          .SDcols = group_by[group_j]]
     }
   }
-  dt[, "_VSPACE" := `_VSPACE` - min(`_VSPACE`)]
+  dt[, "_VSPACE" := eval(parse(text = "`_VSPACE`")) - min(eval(parse(text = "`_VSPACE`")))]
 
   # begin
   switch(tab.environment,
@@ -121,7 +122,7 @@ print_grouped_xtable <- function(dt,
     max(nchar(y))
   }
   
-  format_widths <- vapply(dt, max_nchar, integer(1)) + 2L # 1 either side
+  format_widths <- vapply(dt, max_nchar, integer(1L)) + 2L # 1 either side
   
   for (i in seq_len(nrow(dt))) {
     for (j in seq_len(ncol(dt))) {

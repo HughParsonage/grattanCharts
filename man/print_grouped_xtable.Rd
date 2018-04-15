@@ -19,6 +19,8 @@ print_grouped_xtable(dt, group_by = NULL, align = NULL, cast_cols = NULL,
 
 \item{group_by}{The columns that identify groups. If \code{NULL}, the default, any columns with duplicate entries are used.}
 
+\item{align}{The character vector passed to \code{xtable}.}
+
 \item{cast_cols}{Which elements should be casted to form grouped \code{xtable}s?}
 
 \item{vertical_gap}{A nominal numeric value for the narrowest vertical gap.}

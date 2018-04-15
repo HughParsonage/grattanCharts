@@ -3,6 +3,7 @@
 #' @param bundle_chart_data Whether or not to bundle chart data.
 #' @param theGlobalEnv Must be .GlobalEnv.
 #' @param error Passed to \code{knitr::opts_chunk$set(error)}.
+#' @param chunktimings_width Passed to \code{format} the number of characters to display in the chunktimings time field. By default, 5, which is suitable for 
 #' @return Called for its side-effect: when knitr is in progress, sets up
 #' knitr for consistent formatting.
 #' 
@@ -11,6 +12,7 @@
 setup_knitr_for_grattex <- function(chunktimings.txt = "CHUNKTIMINGS.txt",
                                     bundle_chart_data = FALSE,
                                     theGlobalEnv = .GlobalEnv,
+                                    chunktimings_width = 5,
                                     error = FALSE){
   if (isTRUE(getOption('knitr.in.progress'))){
     BUNDLE.CHART.DATA <- bundle_chart_data

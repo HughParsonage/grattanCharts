@@ -16,8 +16,8 @@ Imports:
     data.table (>= 1.9.8),
     jsonlite,
     magrittr,
-    knitr, 
-    readr, 
+    hutils,
+    knitr,
     xlsx,
     xtable
 RoxygenNote: 6.0.1

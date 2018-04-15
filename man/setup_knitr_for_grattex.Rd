@@ -5,7 +5,8 @@
 \title{Setup knitr for Grattan reports}
 \usage{
 setup_knitr_for_grattex(chunktimings.txt = "CHUNKTIMINGS.txt",
-  bundle_chart_data = FALSE, theGlobalEnv = .GlobalEnv, error = FALSE)
+  bundle_chart_data = FALSE, theGlobalEnv = .GlobalEnv,
+  chunktimings_width = 5, error = FALSE)
 }
 \arguments{
 \item{chunktimings.txt}{The file to write chunk timings}
@@ -13,6 +14,8 @@ setup_knitr_for_grattex(chunktimings.txt = "CHUNKTIMINGS.txt",
 \item{bundle_chart_data}{Whether or not to bundle chart data.}
 
 \item{theGlobalEnv}{Must be .GlobalEnv.}
+
+\item{chunktimings_width}{Passed to \code{format} the number of characters to display in the chunktimings time field. By default, 5, which is suitable for}
 
 \item{error}{Passed to \code{knitr::opts_chunk$set(error)}.}
 }

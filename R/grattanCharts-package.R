@@ -5,6 +5,11 @@
 #' @name grattanCharts-package
 #' @aliases grattanCharts
 #' @docType package
+#' @importFrom hutils %notin%
+#' @importFrom hutils coalesce
+#' @importFrom magrittr %>%
+#' @importFrom hutils if_else
+#' @import data.table
 #' @title Colours, charts, and other common quant tasks
 #' @author \email{hugh.parsonage+grattanpackage@@grattan.edu.au}
 #' @keywords package
