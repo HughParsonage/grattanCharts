@@ -1,18 +1,17 @@
 Package: grattanCharts
 Type: Package
-Title: Create charts in the style of the Grattan Insitute, Melbourne
-Version: 0.6.0
-Date: 2018-04-14
+Title: Create Charts in the Style of the Grattan Insitute, Melbourne
+Version: 0.7.0
+Date: 2018-05-19
 Authors@R: c(person("Hugh", "Parsonage", role = c("aut", "cre"), email = "hugh.parsonage+grattanPackage@grattaninstitute.edu.au"))
-Maintainer: Hugh Parsonage <hugh.parsonage@grattaninstitute.edu.au>
-Description: The original goal of this package was to simply hold the colours of the Grattan palette. Includes additional useful charting mechanisms.
+Maintainer: Hugh Parsonage <hugh.parsonage@gmail.com>
+Description: Used to provide a common charting mechanism for reports of the Grattan Institute, Melbourne. Provides other utilities for 'knitr' reports. 
 Depends: R (>= 2.10)
 License: GPL-2
 Imports:
     grDevices,
     ggplot2 (>= 2.2.0),
     scales,
-    dplyr,
     data.table (>= 1.9.8),
     jsonlite,
     magrittr,
@@ -23,4 +22,7 @@ Imports:
 RoxygenNote: 6.0.1
 LazyData: true
 VignetteBuilder: knitr
-Suggests: testthat, ReporteRs
+Suggests: 
+    testthat,
+    ReporteRs,
+    rmarkdown

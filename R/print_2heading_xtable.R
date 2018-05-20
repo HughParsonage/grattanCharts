@@ -60,13 +60,13 @@ print_2heading_xtable <- function(.data,
   # For cmidrule{}
   position_of_header_instance <- 
     # Need to test first column
-    which(orig_names_no_suffix == dplyr::lead(orig_names_no_suffix) & 
-            (orig_names_no_suffix != dplyr::lag(orig_names_no_suffix) | is.na(dplyr::lag(orig_names_no_suffix))))
+    which(orig_names_no_suffix == lead(orig_names_no_suffix) & 
+            (orig_names_no_suffix != lag(orig_names_no_suffix) | is.na(lag(orig_names_no_suffix))))
   
   position_of_header_final <- 
     # Need to test final column
-    which((orig_names_no_suffix != dplyr::lead(orig_names_no_suffix) | is.na(dplyr::lead(orig_names_no_suffix))) &
-            orig_names_no_suffix == dplyr::lag(orig_names_no_suffix))
+    which((orig_names_no_suffix != lead(orig_names_no_suffix) | is.na(lead(orig_names_no_suffix))) &
+            orig_names_no_suffix == lag(orig_names_no_suffix))
   
   if (length(position_of_header_instance) != length(position_of_header_final)){
     stop("This is a bug. Sorry. Please provide your data frame to the grattan package maintainer.")
