@@ -4,12 +4,14 @@
 \alias{grplot}
 \title{Attempt to harness ggplot but set as much to default as possible}
 \usage{
-grplot(..., reverse = FALSE)
+grplot(..., reverse = FALSE, continuous = FALSE)
 }
 \arguments{
 \item{...}{arguments passed to ggplot}
 
 \item{reverse}{(logical) Option to reverse the default palette.}
+
+\item{continuous}{Expect a continuous colour scale. Using \code{scale_color_continuous} later should still work, but may emit an unwelcome message.}
 }
 \description{
 Attempt to harness ggplot but set as much to default as possible

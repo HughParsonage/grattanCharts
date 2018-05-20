@@ -33,7 +33,7 @@ theme_hugh <- function(base_size = 23, base_family = "") {
       axis.title.y =      element_blank(),
       axis.text =         element_text(),
       axis.line =         element_line(color = "black", size = 1),
-      axis.line.x  = element_line(color = "black", size = 1), 
+      axis.line.x  = element_line(color = "black", size = 0.5), 
       axis.line.y  = element_blank(),
       axis.ticks.length = grid::unit(0.3, "lines"),
       
