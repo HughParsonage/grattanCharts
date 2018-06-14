@@ -22,6 +22,14 @@ Melbourne_coastline <-
   .[N == max(N)] %>%
   .[, c("group", "N", "rowname", "hole", "piece", "id") := NULL]
 
+Brisbane_coastline <- 
+  Australian_coastline %>%
+  .[lat %between% c(-28.14, -26.79)] %>%
+  .[long %between% c(150.0, 153.40)]  %>%
+  # Islands cause difficulties
+  .[, N := .N, by = group] %>%
+  .[N == max(N)]
+
 devtools::use_data(Sydney_coastline,
                    Melbourne_coastline,
                    overwrite = TRUE)
