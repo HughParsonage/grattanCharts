@@ -4,7 +4,7 @@
 \alias{annotate_coastline}
 \title{Annotate coastline}
 \usage{
-annotate_coastline(city = c("Melbourne", "Sydney"),
+annotate_coastline(city = c("Melbourne", "Sydney", "Brisbane"),
   coastline.color = theGrey)
 }
 \arguments{

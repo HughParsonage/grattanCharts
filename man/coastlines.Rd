@@ -5,14 +5,18 @@
 \alias{coastlines}
 \alias{Melbourne_coastline}
 \alias{Sydney_coastline}
+\alias{Sydney_coastline}
 \title{Coastline coordinates}
 \format{\describe{
 \item{\code{long}}{Longitude of coastline.}
 \item{\code{lat}}{Latitude of coastline.}
 \item{\code{order}}{Order of polygon.}
+\item{\code{hole,piece,group,id,rowname,N}}{(Brisbane only) data to distinguish between mainland and island coastlines.}
 }}
 \usage{
 Melbourne_coastline
+
+Sydney_coastline
 
 Sydney_coastline
 }
