@@ -10,11 +10,12 @@
 #' }
 #' @export
 
-annotate_coastline <- function(city = c("Melbourne", "Sydney"), coastline.color = theGrey) {
+annotate_coastline <- function(city = c("Melbourne", "Sydney", "Brisbane"), coastline.color = theGrey) {
   city <- match.arg(city)
   coastline <- switch(city,
                       "Melbourne" = Melbourne_coastline,
-                      "Sydney" = Sydney_coastline)
+                      "Sydney" = Sydney_coastline,
+                      "Brisbane" = Brisbane_coastline)
   ggplot2::annotate("path",
                     x = coastline$long,
                     y = coastline$lat,
