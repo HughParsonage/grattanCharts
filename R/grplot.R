@@ -19,8 +19,8 @@ grplot <- function(..., reverse = FALSE, continuous = FALSE) {
   ggplot2::update_geom_defaults("line", list(fill = Orange, colour = Orange, size = 2))
   if (continuous) {
     ggplot2::ggplot(...) + 
-      scale_color_gradientn(colours = gpal(6, reverse = reverse)) + 
-      scale_fill_gradientn(colours = gpal(6, reverse = reverse)) +
+      ggplot2::scale_color_gradientn(colours = gpal(6, reverse = reverse)) + 
+      ggplot2::scale_fill_gradientn(colours = gpal(6, reverse = reverse)) +
       theme_grattan()
   } else {
     ggplot2::ggplot(...) + 
