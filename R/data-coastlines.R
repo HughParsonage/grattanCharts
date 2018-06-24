@@ -18,6 +18,5 @@ NULL
 #' @rdname coastlines
 "Sydney_coastline"
 
-
 #' @rdname coastlines
-"Sydney_coastline"
+"Brisbane_coastline"

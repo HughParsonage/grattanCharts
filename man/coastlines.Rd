@@ -5,7 +5,7 @@
 \alias{coastlines}
 \alias{Melbourne_coastline}
 \alias{Sydney_coastline}
-\alias{Sydney_coastline}
+\alias{Brisbane_coastline}
 \title{Coastline coordinates}
 \format{\describe{
 \item{\code{long}}{Longitude of coastline.}
@@ -18,7 +18,7 @@ Melbourne_coastline
 
 Sydney_coastline
 
-Sydney_coastline
+Brisbane_coastline
 }
 \description{
 Used to annotate maps to provide the coastline around cities.
