@@ -32,5 +32,6 @@ Brisbane_coastline <-
 
 devtools::use_data(Sydney_coastline,
                    Melbourne_coastline,
+                   Brisbane_coastline,
                    overwrite = TRUE)
 
