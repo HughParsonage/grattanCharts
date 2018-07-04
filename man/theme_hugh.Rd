@@ -4,12 +4,12 @@
 \alias{theme_hugh}
 \title{A theme for use with ggplots}
 \usage{
-theme_hugh(base_size = 23, base_family = "")
+theme_hugh(base_size = 23, base_family = NULL)
 }
 \arguments{
 \item{base_size}{Size in points for the size of text.}
 
-\item{base_family}{Typeface.}
+\item{base_family}{Typeface. If \code{NULL}, set to Helvetica if currently knitting and the font path exists. Otherwise to the default by ggplot2.}
 }
 \description{
 A theme for use with ggplots

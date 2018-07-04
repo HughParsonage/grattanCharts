@@ -38,6 +38,26 @@ setup_knitr_for_grattex <- function(chunktimings.txt = "CHUNKTIMINGS.txt",
       }
     })
     
+    if (requireNamespace("sysfonts", quietly = TRUE)) {
+      helvets <- function(font = c("regular", "bold", "italic")) {
+        font <- match.arg(font)
+        system.file("extdata", 
+                    "logos",
+                    "Fonts",
+                    "helvetic",
+                    switch(font, 
+                           regular = "uhvr8a.pfb",
+                           bold = "uhvb8a.pfb",
+                           italic = "uhvro8a.pfb"),
+                    package = "grattanCharts")
+      }
+      
+      sysfonts::font_add("helvet",
+                         regular = helvets("regular"),
+                         bold = helvets("bold"),
+                         italic = helvets("italic"))
+    }
+    
     knitr::opts_chunk$set(echo = FALSE, 
                           message = FALSE, 
                           warning = TRUE,

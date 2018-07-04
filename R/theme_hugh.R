@@ -2,7 +2,7 @@
 #' 
 #' @name theme_hugh
 #' @param base_size Size in points for the size of text.
-#' @param base_family Typeface.
+#' @param base_family Typeface. If \code{NULL}, set to Helvetica if currently knitting and the font path exists. Otherwise to the default by ggplot2. 
 #' @importFrom ggplot2 %+replace%
 #' @importFrom ggplot2 element_line
 #' @importFrom ggplot2 element_rect
@@ -10,7 +10,16 @@
 #' @importFrom ggplot2 element_blank
 #' @export
 
-theme_hugh <- function(base_size = 23, base_family = "") {
+theme_hugh <- function(base_size = 23, base_family = NULL) {
+  if (is.null(base_family)) {
+    if (requireNamespace("sysfonts", quietly = TRUE) &&
+        "helvet" %in% sysfonts::font_families()) {
+      base_family <- "helvet"
+    } else {
+      base_family <- ""
+    }
+  }
+  
   ggplot2::theme_classic(base_size = base_size, 
                          base_family = base_family) %+replace%
     ggplot2::theme(

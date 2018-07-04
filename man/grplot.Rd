@@ -16,3 +16,7 @@ grplot(..., reverse = FALSE, continuous = FALSE)
 \description{
 Attempt to harness ggplot but set as much to default as possible
 }
+\details{
+Since version 0.8.0 \code{grplot} uses the helvetic fonts automtically if available. 
+Ensure you have sysfonts installed.
+}

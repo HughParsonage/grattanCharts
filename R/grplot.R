@@ -4,6 +4,10 @@
 #' @param ... arguments passed to ggplot
 #' @param reverse (logical) Option to reverse the default palette.
 #' @param continuous Expect a continuous colour scale. Using \code{scale_color_continuous} later should still work, but may emit an unwelcome message.
+#' 
+#' @details Since version 0.8.0 \code{grplot} uses the helvetic fonts automtically if available. 
+#' Ensure you have sysfonts installed.
+#' 
 #' @export 
 
 
