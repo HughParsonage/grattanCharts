@@ -25,6 +25,7 @@ VignetteBuilder: knitr
 Remotes: HughParsonage/ReporteRs
 Suggests: 
     testthat,
+    grattan,
     sysfonts,
     showtextdb,
     showtext,
