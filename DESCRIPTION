@@ -28,6 +28,7 @@ Suggests:
     grattan,
     sysfonts,
     showtextdb,
+    ReporteRs,
     showtext,
     officer,
     rmarkdown
