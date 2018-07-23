@@ -12,7 +12,8 @@
 #' @importFrom magrittr use_series
 #' @export
 save_pptx <- function(p, filename, template = c("presentation", "report"), template.file = NULL) {
-  if (!requireNamespace("ReporteRs", quietly = TRUE)) {
+  if (!requireNamespace("officer", quietly = TRUE) &&
+      !requireNamespace("ReporteRs", quietly = TRUE)) {
     warning("package:ReporteRs is not installed, though is necessary for `save_pptx`.")
   } else {
     if (is.null(template.file)) {
@@ -56,17 +57,27 @@ save_pptx <- function(p, filename, template = c("presentation", "report"), templ
       }
     }
     
-    
-    fun <- function() print(p)
-    ReporteRs::pptx(template = template.file) %>%
-      ReporteRs::addSlide(slide.layout = "Slide with chart") %>%
-      ReporteRs::addPlot(fun = fun, 
-                         fontname_sans = "Arial",
-                         vector.graphic = TRUE, 
-                         width = 22.16/2.5,
-                         height = 14.5/2.5,
-                         offx = if (template == "presentation") 1 else 0,
-                         offy = if (template == "presentation") 2 else 0) %>%
-      ReporteRs::writeDoc(file = filename)
+    if (requireNamespace("ReporteRs", quietly = TRUE)) {
+      fun <- function() print(p)
+      ReporteRs::pptx(template = template.file) %>% ReporteRs::addSlide(slide.layout = "Slide with chart") %>% 
+        ReporteRs::addPlot(fun = fun, fontname_sans = "Arial", 
+                           vector.graphic = TRUE,
+                           width = 22.16/2.5, 
+                           height = 14.5/2.5, 
+                           offx = if (template == "presentation") 1 else 0,
+                           offy = if (template == "presentation") 2 else 0) %>%
+        ReporteRs::writeDoc(file = filename)
+    } else if (requireNamespace("officer", quietly = TRUE)) {
+      officer::read_pptx(path = template.file) %>%
+        officer::add_slide(slide.layout = "Slide with chart") %>%
+        officer::ph_with_gg_at(fun = p, 
+                               fontname_sans = "Arial",
+                               vector.graphic = TRUE, 
+                               width = 22.16/2.5,
+                               height = 14.5/2.5,
+                               left = if (template == "presentation") 1 else 0,
+                               top = if (template == "presentation") 2 else 0) %>%
+        print(target = filename)
+    }
   }
 }
