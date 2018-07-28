@@ -7,7 +7,7 @@
 stacked_bar_with_right_labels(.data, geom = "bar", barwidth,
   verbose = FALSE, right_margin = 0.5, reverse = FALSE,
   scale_fill_manual_args, scale_y_args, x_continuous = FALSE, scale_x_args,
-  coord_cartesian_args, text_family = "", Annotate_Args, theme_grattan.args,
+  coord_cartesian_args, text_family = NULL, Annotate_Args, theme_grattan.args,
   theme.args, nudge_up = 0, nudge_right = 0.5, extra_left_spaces = 0L)
 }
 \arguments{
