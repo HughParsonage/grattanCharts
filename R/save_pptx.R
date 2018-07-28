@@ -11,11 +11,18 @@
 #' 
 #' @examples 
 #' \dontrun{
-#' source("https://gist.githubusercontent.com/HughParsonage/60581c4595f3f10ba201faeacc46cca5/raw/31316307432ee6fef3164e212d21f173ec49d25f/employment-QLD")
+#' # See
+#' paste0("https://gist.githubusercontent.com/HughParsonage/",
+#'       "60581c4595f3f10ba201faeacc46cca5/raw/31316307432ee6fef3164e212d21f173ec49d25f/",
+#'       "employment-QLD")
 #' }
 #' 
 #' @importFrom magrittr use_series
 #' @export
+#' 
+
+
+
 save_pptx <- function(p, filename, template = c("presentation", "report"), template.file = NULL) {
   if (!requireNamespace("officer", quietly = TRUE) &&
       !requireNamespace("ReporteRs", quietly = TRUE)) {
