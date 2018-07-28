@@ -68,7 +68,7 @@ start_rnw <- function(path, rstudio = TRUE) {
                "\\GrattanReportNumber{0}", 
                "", 
                "\\begin{document}", 
-               "<<knitrOpts, include=FALSE>>", 
+               "<<knitrOpts, include=FALSE>>=", 
                "library(knitr)", 
                "@",
                "",
