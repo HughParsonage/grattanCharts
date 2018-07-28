@@ -48,7 +48,7 @@ stacked_bar_with_right_labels <- function(.data,
                                           x_continuous = FALSE,
                                           scale_x_args,
                                           coord_cartesian_args,
-                                          text_family = "",
+                                          text_family = NULL,
                                           Annotate_Args,
                                           theme_grattan.args,
                                           theme.args, 
@@ -69,6 +69,15 @@ stacked_bar_with_right_labels <- function(.data,
       stop("x must be numeric")
     }
   }
+  if (is.null(text_family)) {
+    if (requireNamespace("sysfonts", quietly = TRUE) &&
+        "helvet" %in% sysfonts::font_families()) {
+      text_family = "helvet"
+    } else {
+      text_family = ""
+    }
+  }
+  
   
   .plot.data <- 
     .data %>%
@@ -117,7 +126,7 @@ stacked_bar_with_right_labels <- function(.data,
     if (missing(barwidth)){
       p <- 
         grplot(.plot.data, reverse = reverse) + 
-        theme_hugh(base_family = text_family) + 
+        theme_hugh(base_size = 18, base_family = text_family) + 
         ggplot2::geom_bar(ggplot2::aes(x = x, y = y, fill = fill), stat = "identity") +
         ggplot2::geom_text(ggplot2::aes(label = text.label, 
                                         x = text.x,
@@ -127,12 +136,12 @@ stacked_bar_with_right_labels <- function(.data,
                            hjust = 0,
                            lineheight = 0.9,
                            family = text_family,
-                           size = 20/(14/5),
+                           size = 18/(14/5),
                            fontface = "bold") 
     } else {
       p <- 
         grplot(.plot.data, reverse = reverse) + 
-        theme_hugh(base_family = text_family) + 
+        theme_hugh(base_size = 18, base_family = text_family) + 
         ggplot2::geom_bar(ggplot2::aes(x = x, y = y, fill = fill), stat = "identity", width = barwidth) +
         ggplot2::geom_text(ggplot2::aes(label = text.label, 
                                         x = text.x,
@@ -142,7 +151,7 @@ stacked_bar_with_right_labels <- function(.data,
                            hjust = 0,
                            lineheight = 0.9,
                            family = text_family,
-                           size = 20/(14/5),
+                           size = 18/(14/5),
                            fontface = "bold") 
     }
     if (!missing(scale_fill_manual_args)){

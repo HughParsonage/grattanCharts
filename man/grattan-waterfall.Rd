@@ -72,5 +72,7 @@ grattan_waterfall(.data = NULL, values, labels, rect_text_labels = values,
 Create waterfall charts
 }
 \examples{
+\dontrun{
 grattan_waterfall(values = round(rnorm(5), 2), labels = LETTERS[1:5])
+}
 }

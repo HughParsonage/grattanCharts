@@ -18,6 +18,15 @@
 
 texNum <- function(number, sig.figs = 3L, dollar = FALSE, pre.phrase = NULL, .suffix = NULL){
   orig.number <- number
+  if (length(number) != 1L) {
+    stop("`number` had length ", length(number), ". ",
+         "Only length-1 is supported. Ensure `number` is a single number.")
+  }
+  if (!is.numeric(number)) {
+    stop("`number` was type ", typeof(number), ", but must be a number.",
+         "Ensure `number` is a single number.")
+  }
+  
   stopifnot(is.numeric(number), length(number) == 1L)
   is.negative <- number < 0
   number <- abs(number)

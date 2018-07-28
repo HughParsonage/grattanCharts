@@ -4,8 +4,8 @@ warnings_are_errors: true
 
 r_github_packages:
   - jimhester/covr
+  - hughparsonage/ReporteRsjars
   - hughparsonage/ReporteRs
-  - hughparsonage/ReporteRjars
 
 after_success:
   - Rscript -e 'covr::codecov(function_exclusions = "install")'
