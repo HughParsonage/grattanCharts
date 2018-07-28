@@ -11,6 +11,7 @@ License: GPL-2
 Imports:
     grDevices,
     ggplot2 (>= 2.2.0),
+    devtools,
     scales,
     data.table (>= 1.9.8),
     jsonlite,
@@ -22,7 +23,9 @@ Imports:
 RoxygenNote: 6.0.1
 LazyData: true
 VignetteBuilder: knitr
-Remotes: HughParsonage/ReporteRs
+Remotes:
+    HughParsonage/ReporteRs,
+    HughParsonage/ReporteRsjars
 Suggests: 
     testthat,
     grattan,

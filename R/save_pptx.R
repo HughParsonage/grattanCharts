@@ -4,6 +4,11 @@
 #' @param template Either \code{presentation} or \code{report}, the template on Dropbox to be used. 
 #' Only useful if connected to Dropbox. Can be overriden by \code{template.file}.
 #' @param template.file If set, the file (must have extension \code{.pptx}) to be used in the template.
+#' 
+#' @details 
+#' Generally, you will need the \code{ReporteRs} package which has been deprecated on CRAN, 
+#' so you will need to install it remotely. \code{\link{install_reporters}}.
+#' 
 #' @examples 
 #' \dontrun{
 #' source("https://gist.githubusercontent.com/HughParsonage/60581c4595f3f10ba201faeacc46cca5/raw/31316307432ee6fef3164e212d21f173ec49d25f/employment-QLD")
@@ -68,11 +73,12 @@ save_pptx <- function(p, filename, template = c("presentation", "report"), templ
                            offy = if (template == "presentation") 2 else 0) %>%
         ReporteRs::writeDoc(file = filename)
     } else if (requireNamespace("officer", quietly = TRUE)) {
-      officer::read_pptx(path = template.file) %>%
-        officer::add_slide(slide.layout = "Slide with chart") %>%
-        officer::ph_with_gg_at(fun = p, 
-                               fontname_sans = "Arial",
-                               vector.graphic = TRUE, 
+      template <- officer::read_pptx(path = template.file)
+      template %<>% officer::add_slide(layout = "Slide with chart",
+                                       master = "Charts for overheads")
+        officer::ph_with_gg_at(x = template,
+                               value= p, 
+                               # fontname_sans = "Arial",
                                width = 22.16/2.5,
                                height = 14.5/2.5,
                                left = if (template == "presentation") 1 else 0,

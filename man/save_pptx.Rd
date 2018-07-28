@@ -20,6 +20,10 @@ Only useful if connected to Dropbox. Can be overriden by \code{template.file}.}
 \description{
 Save plot as PowerPoint
 }
+\details{
+Generally, you will need the \code{ReporteRs} package which has been deprecated on CRAN, 
+so you will need to install it remotely. \code{\link{install_reporters}}.
+}
 \examples{
 \dontrun{
 source("https://gist.githubusercontent.com/HughParsonage/60581c4595f3f10ba201faeacc46cca5/raw/31316307432ee6fef3164e212d21f173ec49d25f/employment-QLD")
