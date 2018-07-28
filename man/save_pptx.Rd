@@ -26,7 +26,10 @@ so you will need to install it remotely. \code{\link{install_reporters}}.
 }
 \examples{
 \dontrun{
-source("https://gist.githubusercontent.com/HughParsonage/60581c4595f3f10ba201faeacc46cca5/raw/31316307432ee6fef3164e212d21f173ec49d25f/employment-QLD")
+# See
+paste0("https://gist.githubusercontent.com/HughParsonage/",
+      "60581c4595f3f10ba201faeacc46cca5/raw/31316307432ee6fef3164e212d21f173ec49d25f/",
+      "employment-QLD")
 }
 
 }
