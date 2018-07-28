@@ -13,9 +13,9 @@
 annotate_coastline <- function(city = c("Melbourne", "Sydney", "Brisbane"), coastline.color = theGrey) {
   city <- match.arg(city)
   coastline <- switch(city,
-                      "Melbourne" = Melbourne_coastline,
-                      "Sydney" = Sydney_coastline,
-                      "Brisbane" = Brisbane_coastline)
+                      "Melbourne" = grattanCharts::Melbourne_coastline,
+                      "Sydney" = grattanCharts::Sydney_coastline,
+                      "Brisbane" = grattanCharts::Brisbane_coastline)
   ggplot2::annotate("path",
                     x = coastline$long,
                     y = coastline$lat,
