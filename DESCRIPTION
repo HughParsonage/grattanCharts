@@ -32,6 +32,7 @@ Suggests:
     sysfonts,
     showtextdb,
     ReporteRs,
+    rstudioapi,
     showtext,
     officer,
     rmarkdown

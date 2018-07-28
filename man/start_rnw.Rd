@@ -10,6 +10,8 @@ start_rnw(path, rstudio = TRUE)
 \item{path}{A file path, either to a filename to create, or a directory into which to create a file.
 Will be assumed to be a directory, unless it ends in \code{.Rnw} in which case it will be taken
 to be the filename.}
+
+\item{rstudio}{Should the RStudio API be used (if available)?}
 }
 \description{
 Not to be used for reports: clone the grattex repository instead. Use-case is

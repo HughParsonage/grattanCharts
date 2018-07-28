@@ -27,7 +27,9 @@
 #' @param print_plot (logical) Whether or not the plot should be printed. By default, \code{TRUE}, which means it cannot be assigned.
 #' @param ggplot_object_name (character) A quoted valid object name to which ggplot layers may be addded after the function has run. Ignored if \code{print} is \code{FALSE}.
 #' @examples 
+#' \dontrun{
 #' grattan_waterfall(values = round(rnorm(5), 2), labels = LETTERS[1:5])
+#' }
 #' @export
 
 

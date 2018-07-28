@@ -4,6 +4,7 @@
 #' @param path A file path, either to a filename to create, or a directory into which to create a file.
 #' Will be assumed to be a directory, unless it ends in \code{.Rnw} in which case it will be taken
 #' to be the filename.
+#' @param rstudio Should the RStudio API be used (if available)? 
 #' @details
 #' If using RStudio, will pop to the document when completed.
 #' @export
@@ -82,7 +83,9 @@ start_rnw <- function(path, rstudio = TRUE) {
                ""),
              .file)
   
-  if (rstudio && rstudioapi::verifyAvailable()) {
+  if (rstudio && 
+      requireNamespace("rstudioapi", quietly = TRUE) &&
+      rstudioapi::verifyAvailable()) {
     rstudioapi::navigateToFile(.file, line = 18L)
   }
   invisible(.file)
