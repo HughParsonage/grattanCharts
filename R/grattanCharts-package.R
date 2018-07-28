@@ -8,6 +8,7 @@
 #' @importFrom hutils %notin%
 #' @importFrom hutils coalesce
 #' @importFrom magrittr %>%
+#' @importFrom magrittr %<>%
 #' @importFrom hutils if_else
 #' @import data.table
 #' @title Colours, charts, and other common quant tasks

@@ -4,6 +4,11 @@
 #' @param template Either \code{presentation} or \code{report}, the template on Dropbox to be used. 
 #' Only useful if connected to Dropbox. Can be overriden by \code{template.file}.
 #' @param template.file If set, the file (must have extension \code{.pptx}) to be used in the template.
+#' 
+#' @details 
+#' Generally, you will need the \code{ReporteRs} package which has been deprecated on CRAN, 
+#' so you will need to install it remotely. \code{\link{install_reporters}}.
+#' 
 #' @examples 
 #' \dontrun{
 #' source("https://gist.githubusercontent.com/HughParsonage/60581c4595f3f10ba201faeacc46cca5/raw/31316307432ee6fef3164e212d21f173ec49d25f/employment-QLD")
@@ -12,7 +17,8 @@
 #' @importFrom magrittr use_series
 #' @export
 save_pptx <- function(p, filename, template = c("presentation", "report"), template.file = NULL) {
-  if (!requireNamespace("ReporteRs", quietly = TRUE)) {
+  if (!requireNamespace("officer", quietly = TRUE) &&
+      !requireNamespace("ReporteRs", quietly = TRUE)) {
     warning("package:ReporteRs is not installed, though is necessary for `save_pptx`.")
   } else {
     if (is.null(template.file)) {
@@ -56,17 +62,28 @@ save_pptx <- function(p, filename, template = c("presentation", "report"), templ
       }
     }
     
-    
-    fun <- function() print(p)
-    ReporteRs::pptx(template = template.file) %>%
-      ReporteRs::addSlide(slide.layout = "Slide with chart") %>%
-      ReporteRs::addPlot(fun = fun, 
-                         fontname_sans = "Arial",
-                         vector.graphic = TRUE, 
-                         width = 22.16/2.5,
-                         height = 14.5/2.5,
-                         offx = if (template == "presentation") 1 else 0,
-                         offy = if (template == "presentation") 2 else 0) %>%
-      ReporteRs::writeDoc(file = filename)
+    if (requireNamespace("ReporteRs", quietly = TRUE)) {
+      fun <- function() print(p)
+      ReporteRs::pptx(template = template.file) %>% ReporteRs::addSlide(slide.layout = "Slide with chart") %>% 
+        ReporteRs::addPlot(fun = fun, fontname_sans = "Arial", 
+                           vector.graphic = TRUE,
+                           width = 22.16/2.5, 
+                           height = 14.5/2.5, 
+                           offx = if (template == "presentation") 1 else 0,
+                           offy = if (template == "presentation") 2 else 0) %>%
+        ReporteRs::writeDoc(file = filename)
+    } else if (requireNamespace("officer", quietly = TRUE)) {
+      template <- officer::read_pptx(path = template.file)
+      template %<>% officer::add_slide(layout = "Slide with chart",
+                                       master = "Charts for overheads")
+        officer::ph_with_gg_at(x = template,
+                               value= p, 
+                               # fontname_sans = "Arial",
+                               width = 22.16/2.5,
+                               height = 14.5/2.5,
+                               left = if (template == "presentation") 1 else 0,
+                               top = if (template == "presentation") 2 else 0) %>%
+        print(target = filename)
+    }
   }
 }
