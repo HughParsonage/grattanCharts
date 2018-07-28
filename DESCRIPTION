@@ -24,8 +24,8 @@ RoxygenNote: 6.0.1
 LazyData: true
 VignetteBuilder: knitr
 Remotes:
-    HughParsonage/ReporteRs,
-    HughParsonage/ReporteRsjars
+  HughParsonage/ReporteRsjars,
+  HughParsonage/ReporteRs
 Suggests: 
     testthat,
     grattan,
