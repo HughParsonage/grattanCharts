@@ -5,17 +5,19 @@
 \alias{grattan_waterfall}
 \title{Create waterfall charts}
 \usage{
-grattan_waterfall(.data = NULL, values, labels, rect_text_labels = values,
-  rect_text_size = 7.14, rect_text_labels_anchor = "centre",
+grattan_waterfall(.data = NULL, values, labels,
+  rect_text_labels = values, rect_text_size = 7.14,
+  rect_text_labels_anchor = "centre",
   put_rect_text_outside_when_value_below = 0.05 * (max(cumsum(values)) -
   min(cumsum(values))), calc_total = FALSE, total_axis_text = "Total",
   total_rect_text = sum(values), total_rect_color = gpal(6)[1],
-  total_rect_text_color = "white", fill_colours = gpalx(length(values)),
-  fill_by_sign = TRUE, dark = FALSE, rect_width = 0.7,
-  rect_border = NA_character_, draw_lines = TRUE,
-  lines_anchors = c("right", "left"), linetype = "dashed",
-  draw_axis.x = "behind", x_axis_labels = TRUE, theme_text_family = "",
-  print_plot = TRUE, ggplot_object_name = "mywaterfall")
+  total_rect_text_color = "white",
+  fill_colours = gpalx(length(values)), fill_by_sign = TRUE,
+  dark = FALSE, rect_width = 0.7, rect_border = NA_character_,
+  draw_lines = TRUE, lines_anchors = c("right", "left"),
+  linetype = "dashed", draw_axis.x = "behind", x_axis_labels = TRUE,
+  theme_text_family = "", print_plot = TRUE,
+  ggplot_object_name = "mywaterfall")
 }
 \arguments{
 \item{.data}{a data frame containing two columns, one with the values, the other with the labels}

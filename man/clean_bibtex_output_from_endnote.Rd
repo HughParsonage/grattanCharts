@@ -5,7 +5,8 @@
 \title{endnote_to_bibtex}
 \usage{
 clean_bibtex_output_from_endnote(filename,
-  outname = paste0(gsub("(.*)\\\\.txt$", "\\\\1", filename), "cleaned.txt"))
+  outname = paste0(gsub("(.*)\\\\.txt$", "\\\\1", filename),
+  "cleaned.txt"))
 }
 \arguments{
 \item{filename}{the exported txt filename carried from Endnote via BibTeX Export utility that is dirty and must be cleaned}

@@ -20,7 +20,7 @@ Imports:
     knitr,
     xlsx,
     xtable
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.0
 LazyData: true
 VignetteBuilder: knitr
 Remotes:

@@ -127,7 +127,9 @@ stacked_bar_with_right_labels <- function(.data,
       p <- 
         grplot(.plot.data, reverse = reverse) + 
         theme_hugh(base_size = 18, base_family = text_family) + 
-        ggplot2::geom_bar(ggplot2::aes(x = x, y = y, fill = fill), stat = "identity") +
+        ggplot2::geom_bar(ggplot2::aes(x = x, y = y, fill = fill),
+                          color = "white",
+                          stat = "identity") +
         ggplot2::geom_text(ggplot2::aes(label = text.label, 
                                         x = text.x,
                                         y = text.y, 
@@ -142,7 +144,10 @@ stacked_bar_with_right_labels <- function(.data,
       p <- 
         grplot(.plot.data, reverse = reverse) + 
         theme_hugh(base_size = 18, base_family = text_family) + 
-        ggplot2::geom_bar(ggplot2::aes(x = x, y = y, fill = fill), stat = "identity", width = barwidth) +
+        ggplot2::geom_bar(ggplot2::aes(x = x, y = y, fill = fill),
+                          stat = "identity",
+                          color = "white",
+                          width = barwidth) +
         ggplot2::geom_text(ggplot2::aes(label = text.label, 
                                         x = text.x,
                                         y = text.y, 
@@ -159,6 +164,8 @@ stacked_bar_with_right_labels <- function(.data,
         warning("Both 'scale_fill_manual_args' and 'reverse' provided; 'reverse' will be ignored.")
       }
       p <- p + do.call(ggplot2::scale_fill_manual, args = scale_fill_manual_args)
+      # To match with the text labels!
+      p <- p + do.call(ggplot2::scale_color_manual, args = scale_fill_manual_args)
     }
     
     if (!missing(scale_x_args)){

@@ -5,8 +5,8 @@
 \title{Print LaTeX tables with headings over two lines}
 \usage{
 print_2heading_xtable(.data, separator = "__", xtable.align = NULL,
-  booktabs = TRUE, heading_command = "\\\\textbf", xtable.dots = NULL,
-  ...)
+  booktabs = TRUE, heading_command = "\\\\textbf",
+  xtable.dots = NULL, ...)
 }
 \arguments{
 \item{.data}{A data frame with at least some of the column names having a \code{separator}.}
