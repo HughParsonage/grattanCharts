@@ -56,6 +56,11 @@ setup_knitr_for_grattex <- function(chunktimings.txt = "CHUNKTIMINGS.txt",
                          regular = helvets("regular"),
                          bold = helvets("bold"),
                          italic = helvets("italic"))
+      ggplot2::update_geom_defaults("text", list(size = 18/(14/5), family = "helvet"))
+      ggplot2::update_geom_defaults("label", list(size = 18/(14/5), family = "helvet"))
+    } else {
+      ggplot2::update_geom_defaults("text", list(size = 18/(14/5)))
+      ggplot2::update_geom_defaults("label", list(size = 18/(14/5)))
     }
     
     knitr::opts_chunk$set(echo = FALSE, 
