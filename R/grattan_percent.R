@@ -13,6 +13,6 @@
 #' 
 #' @export grattan_percent
 
-grattan_percent <- function(number, digits = 1, .percent.suffix = "~per~cent"){
-  paste0(scales::comma(100 * number, digits = digits), .percent.suffix)
+grattan_percent <- function(number, digits = 1, .percent.suffix = "~per~cent") {
+  paste0(sprintf(paste0("%.0", digits, "f"), number * 100), .percent.suffix)
 }
