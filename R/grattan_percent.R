@@ -11,6 +11,9 @@
 #' @param .percent.suffix What to use for the suffix of the number.
 #' @return For \code{grattan_percent}, the number multiplied by 100, with rounding provided by \code{scales::comma} and then the suffix. 
 #' 
+#' @examples
+#' grattan_percent(2/3, digits = 0)
+#' 
 #' @export grattan_percent
 
 grattan_percent <- function(number, digits = 1, .percent.suffix = "~per~cent") {

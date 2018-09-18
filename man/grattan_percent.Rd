@@ -23,3 +23,7 @@ A complement to \code{\link{texNum}}.
 
 These functions are all of the form \code{grattan_*} to avoid namespace clashes.
 }
+\examples{
+grattan_percent(2/3, digits = 0)
+
+}

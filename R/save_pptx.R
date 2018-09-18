@@ -4,7 +4,7 @@
 #' @param template Either \code{presentation} or \code{report}, the template on Dropbox to be used. 
 #' Only useful if connected to Dropbox. Can be overriden by \code{template.file}.
 #' @param template.file If set, the file (must have extension \code{.pptx}) to be used in the template.
-#' 
+#' @param f A function that prints the input, such as \code{grid::grid.draw}.
 #' @details 
 #' Generally, you will need the \code{ReporteRs} package which has been deprecated on CRAN, 
 #' so you will need to install it remotely. \code{\link{install_reporters}}.
@@ -23,7 +23,9 @@
 
 
 
-save_pptx <- function(p, filename, template = c("presentation", "report"), template.file = NULL) {
+save_pptx <- function(p, filename, template = c("presentation", "report"),
+                      template.file = NULL,
+                      f = NULL) {
   if (!requireNamespace("officer", quietly = TRUE) &&
       !requireNamespace("ReporteRs", quietly = TRUE)) {
     warning("package:ReporteRs is not installed, though is necessary for `save_pptx`.")
@@ -70,8 +72,21 @@ save_pptx <- function(p, filename, template = c("presentation", "report"), templ
     }
     
     if (requireNamespace("ReporteRs", quietly = TRUE)) {
-      fun <- function() print(p)
-      ReporteRs::pptx(template = template.file) %>% ReporteRs::addSlide(slide.layout = "Slide with chart") %>% 
+      fun <- 
+        if (is.null(f)) {
+          if (is.ggplot(p)) {
+            function() print(p)
+          } else if (grid::is.grob(p)) {
+            function() grid::grid.draw(p)
+          } else {
+            stop("`p` is not a ggplot or grob object. ",
+                 "Consider using `f` to pass to ReporteRs::addPlot.")
+          }
+        } else {
+          f
+        }
+      ReporteRs::pptx(template = template.file) %>%
+        ReporteRs::addSlide(slide.layout = if (template == "presentation") "Slide with chart" else "Chart") %>% 
         ReporteRs::addPlot(fun = fun, fontname_sans = "Arial", 
                            vector.graphic = TRUE,
                            width = 22.16/2.5, 
