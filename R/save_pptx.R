@@ -74,7 +74,7 @@ save_pptx <- function(p, filename, template = c("presentation", "report"),
     if (requireNamespace("ReporteRs", quietly = TRUE)) {
       fun <- 
         if (is.null(f)) {
-          if (is.ggplot(p)) {
+          if (ggplot2::is.ggplot(p)) {
             function() print(p)
           } else if (grid::is.grob(p)) {
             function() grid::grid.draw(p)
@@ -87,7 +87,8 @@ save_pptx <- function(p, filename, template = c("presentation", "report"),
         }
       ReporteRs::pptx(template = template.file) %>%
         ReporteRs::addSlide(slide.layout = if (template == "presentation") "Slide with chart" else "Chart") %>% 
-        ReporteRs::addPlot(fun = fun, fontname_sans = "Arial", 
+        ReporteRs::addPlot(fun = fun,
+                           fontname_sans = "Arial", 
                            vector.graphic = TRUE,
                            width = 22.16/2.5, 
                            height = 14.5/2.5, 
