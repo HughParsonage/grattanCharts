@@ -5,7 +5,7 @@
 \title{Save plot as PowerPoint}
 \usage{
 save_pptx(p, filename, template = c("presentation", "report"),
-  template.file = NULL)
+  template.file = NULL, f = NULL)
 }
 \arguments{
 \item{p}{A \code{ggplot2} object.}
@@ -16,6 +16,8 @@ save_pptx(p, filename, template = c("presentation", "report"),
 Only useful if connected to Dropbox. Can be overriden by \code{template.file}.}
 
 \item{template.file}{If set, the file (must have extension \code{.pptx}) to be used in the template.}
+
+\item{f}{A function that prints the input, such as \code{grid::grid.draw}.}
 }
 \description{
 Save plot as PowerPoint
