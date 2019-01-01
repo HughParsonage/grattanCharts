@@ -6,7 +6,8 @@
 \usage{
 setup_knitr_for_grattex(chunktimings.txt = "CHUNKTIMINGS.txt",
   bundle_chart_data = FALSE, theGlobalEnv = .GlobalEnv,
-  chunktimings_width = 5, error = FALSE)
+  chunktimings_width = 5, alignAllowedExtra = c("R", "N"),
+  halt_if_xtable_unattached = NULL, error = FALSE)
 }
 \arguments{
 \item{chunktimings.txt}{The file to write chunk timings}
@@ -15,9 +16,23 @@ setup_knitr_for_grattex(chunktimings.txt = "CHUNKTIMINGS.txt",
 
 \item{theGlobalEnv}{Must be .GlobalEnv.}
 
-\item{chunktimings_width}{Passed to \code{format} the number of characters to display in the chunktimings time field. By default, 5, which is suitable for}
+\item{chunktimings_width}{Passed to \code{format} the number of characters to display in the chunktimings time field. By default, 5, which allows less than 1000 seconds
+per chunk.}
 
-\item{error}{Passed to \code{knitr::opts_chunk$set(error)}.}
+\item{alignAllowedExtra}{A character vector of single characters to add
+as permitted values to pass
+to the \code{align} argument to \code{\link[xtable][xtable]}. By default, 
+\code{c("R", "N")} to avoid spurious warnings when these are used.}
+
+\item{halt_if_xtable_unattached}{If \code{TRUE}, \code{xtable} must
+be attached when the function is called. If \code{NULL}, the default
+a message is printed recommending it be attached.  It should be 
+attached so that the parts of this function affecting \code{xtable}
+have a chance of being effected. If \code{FALSE}, neither an error
+nor a message is given.}
+
+\item{error}{Passed to \code{knitr::opts_chunk$set(error = < >)}. By default,
+\code{FALSE}, so that errors in chunks halt compilation.}
 }
 \value{
 Called for its side-effect: when knitr is in progress, sets up
