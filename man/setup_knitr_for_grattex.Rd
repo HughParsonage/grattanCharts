@@ -21,7 +21,7 @@ per chunk.}
 
 \item{alignAllowedExtra}{A character vector of single characters to add
 as permitted values to pass
-to the \code{align} argument to \code{\link[xtable][xtable]}. By default, 
+to the \code{align} argument to \code{\link[xtable]{xtable}}. By default, 
 \code{c("R", "N")} to avoid spurious warnings when these are used.}
 
 \item{halt_if_xtable_unattached}{If \code{TRUE}, \code{xtable} must

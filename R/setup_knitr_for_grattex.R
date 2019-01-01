@@ -6,7 +6,7 @@
 #' per chunk.
 #' @param alignAllowedExtra A character vector of single characters to add
 #' as permitted values to pass
-#' to the \code{align} argument to \code{\link[xtable][xtable]}. By default, 
+#' to the \code{align} argument to \code{\link[xtable]{xtable}}. By default, 
 #' \code{c("R", "N")} to avoid spurious warnings when these are used.
 #' @param halt_if_xtable_unattached If \code{TRUE}, \code{xtable} must
 #' be attached when the function is called. If \code{NULL}, the default

@@ -18,6 +18,7 @@ Imports:
     magrittr,
     hutils,
     knitr,
+    utils,
     xlsx,
     xtable
 RoxygenNote: 6.1.1
@@ -29,6 +30,7 @@ Remotes:
 Suggests: 
     testthat,
     grattan,
+    scales,
     sysfonts,
     showtextdb,
     ReporteRs,

@@ -11,6 +11,7 @@
 #' @importFrom magrittr %<>%
 #' @importFrom hutils if_else
 #' @importFrom utils download.file
+#' @importFrom utils assignInNamespace
 #' @import data.table
 #' @title Colours, charts, and other common quant tasks
 #' @author \email{hugh.parsonage+grattanpackage@@grattan.edu.au}
