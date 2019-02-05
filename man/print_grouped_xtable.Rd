@@ -8,7 +8,7 @@ print_grouped_xtable(dt, group_by = NULL, align = NULL,
   cast_cols = NULL, vertical_gap = 0.5,
   vertical_gap_units = "baselineskip", out.file = NULL,
   overwrite = TRUE, booktabs = TRUE, tab.environment = c("tabular",
-  "tabularx"), tabularx.width = "\\\\linewidth",
+  "tabularx", "longtable"), tabularx.width = "\\\\linewidth",
   logical_fn = c(`\\\\parbox[c]{0.9\\\\PositionColumnWidth}{\\\\centering\\\\XSolidBold}`
   = FALSE,
   `\\\\parbox[c]{0.9\\\\PositionColumnWidth}{\\\\centering\\\\CheckmarkBold}`

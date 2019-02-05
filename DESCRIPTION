@@ -1,8 +1,8 @@
 Package: grattanCharts
 Type: Package
 Title: Create Charts in the Style of the Grattan Insitute, Melbourne
-Version: 0.10.0
-Date: 2019-01-01
+Version: 0.11.0
+Date: 2019-02-06
 Authors@R: c(person("Hugh", "Parsonage", role = c("aut", "cre"), email = "hugh.parsonage+grattanPackage@grattaninstitute.edu.au"))
 Maintainer: Hugh Parsonage <hugh.parsonage@gmail.com>
 Description: Used to provide a common charting mechanism for reports of the Grattan Institute, Melbourne. Provides other utilities for 'knitr' reports. 

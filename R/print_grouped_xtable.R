@@ -23,7 +23,7 @@ print_grouped_xtable <- function(dt,
                                  out.file = NULL,
                                  overwrite = TRUE,
                                  booktabs = TRUE,
-                                 tab.environment = c("tabular", "tabularx"),
+                                 tab.environment = c("tabular", "tabularx", "longtable"),
                                  tabularx.width = "\\linewidth",
                                  # usepackage{bbding}
                                  logical_fn = c("\\parbox[c]{0.9\\PositionColumnWidth}{\\centering\\XSolidBold}" = FALSE,
@@ -111,8 +111,9 @@ print_grouped_xtable <- function(dt,
 
   # begin
   switch(tab.environment,
-         "tabular"  = cat("\\begin{tabular}"),
-         "tabularx" = cat("\\begin{tabularx}", "{", tabularx.width, "}"))
+         "tabular"   = cat("\\begin{tabular}"),
+         "longtable" = cat("\\begin{longtable}"),
+         "tabularx"  = cat("\\begin{tabularx}", "{", tabularx.width, "}"))
   
   cat("{", "@{}c@{}", align, "@{}c2@{}", "}")
   cat("\n")
@@ -151,8 +152,9 @@ print_grouped_xtable <- function(dt,
   
   
   switch(tab.environment,
-         "tabular"  = cat("\\end{tabular}"),
-         "tabularx" = cat("\\end{tabularx}"))
+         "tabular"   = cat("\\end{tabular}"),
+         "longtable" = cat("\\end{longtable}"),
+         "tabularx"  = cat("\\end{tabularx}"))
   cat("\n")
   dt
 }
