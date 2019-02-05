@@ -3,7 +3,6 @@
 #' @param dt A \code{data.table} or coercible to such.
 #' @param group_by The columns that identify groups. If \code{NULL}, the default, any columns with duplicate entries are used.
 #' @param align The character vector passed to \code{xtable}.
-#' @param cast_cols Which elements should be casted to form grouped \code{xtable}s?
 #' @param vertical_gap A nominal numeric value for the narrowest vertical gap.
 #' @param vertical_gap_units The units of \code{vertical_gap}.
 #' @param out.file The file to divert the LaTeX code to.
@@ -12,12 +11,13 @@
 #' @param tab.environment Which tabular environment should the table be enclosed in. By default \code{tabular}.
 #' @param tabularx.width If \code{tab.environment = "tabularx"}, what should the total width of the table be (\emph{i.e.} the first argument of \code{tabularx})?
 #' @param logical_fn How should logical columns be reformatted?
+#' @param column_format How should column names be formatted? Defaults to the \code{xtable}
+#' default, or boldface if that option is \code{NULL}.
 #' @export print_grouped_xtable
 
 print_grouped_xtable <- function(dt,
                                  group_by = NULL,
                                  align = NULL,
-                                 cast_cols = NULL,
                                  vertical_gap = 0.5,
                                  vertical_gap_units = "baselineskip",
                                  out.file = NULL,
@@ -28,7 +28,11 @@ print_grouped_xtable <- function(dt,
                                  # usepackage{bbding}
                                  logical_fn = c("\\parbox[c]{0.9\\PositionColumnWidth}{\\centering\\XSolidBold}" = FALSE,
                                                 "\\parbox[c]{0.9\\PositionColumnWidth}{\\centering\\CheckmarkBold}" = TRUE,
-                                                " " = NA)) {
+                                                " " = NA),
+                                 column_format = getOption("xtable.sanitize.colnames.function", 
+                                                           function(x) sprintf("\\textbf{%s}", x)),
+                                 caption = NULL,
+                                 label = NULL) {
   if (!is.data.table(dt)) {
     dt <- as.data.table(dt)
   }
@@ -48,18 +52,6 @@ print_grouped_xtable <- function(dt,
          "Use a different column name.")
   }
   
-  .na <- function() {
-    tryCatch(NA_character_,
-             error = function(e) {
-               tryCatch(NA_real_,
-                        error = function(e) {
-                          tryCatch(NA_integer_,
-                                   error = function(e) {
-                                     NA
-                                   })
-                        })
-             })
-  }
   if (nzchar(out.file)) {
     if (overwrite) {
       if (file.remove(out.file) && file.create(out.file)) {
@@ -67,6 +59,8 @@ print_grouped_xtable <- function(dt,
         warning("`out.file` was not removed.")
       }
     }
+  } else if (is.null(out.file)) {
+    out.file <- ""
   }
   
   cat <- function(...) base::cat(..., file = out.file, sep = "", append = TRUE)
@@ -81,8 +75,10 @@ print_grouped_xtable <- function(dt,
   
   headers <- names(dt)
   
+  column_format <- match.fun(column_format)
+  
   formatted_headers <-
-    c("", sprintf("\\textbf{%s}", headers[headers %notin% c("_PHANTOM", "_VSPACE")], ""))
+    c("", column_format(headers[headers %notin% c("_PHANTOM", "_VSPACE")]), "")
 
   # Idea is to add vertical space between groups by placing more vspace 
   # at the start of every non duplicated group; less space at the
@@ -109,14 +105,37 @@ print_grouped_xtable <- function(dt,
   }
   dt[, "_VSPACE" := eval(parse(text = "`_VSPACE`")) - min(eval(parse(text = "`_VSPACE`")))]
 
+  if (!is.null(caption) && tab.environment != "longtable") {
+    # longtable captions are within the environment
+    cat("\\caption{", caption, "}",
+        if (!is.null(label)) {
+          paste0("\\label{", label, "}")
+        },
+        "\n")
+  }
+  
   # begin
   switch(tab.environment,
          "tabular"   = cat("\\begin{tabular}"),
          "longtable" = cat("\\begin{longtable}"),
          "tabularx"  = cat("\\begin{tabularx}", "{", tabularx.width, "}"))
   
-  cat("{", "@{}c@{}", align, "@{}c2@{}", "}")
+  cat("{", "@{}c@{}", align, "@{}c@{}", "}")
   cat("\n")
+  
+  if (!is.null(caption) && tab.environment == "longtable") {
+    cat("\\caption{", caption, "}",
+        if (!is.null(label)) {
+          paste0("\\label{", label, "}")
+        },
+        "\\\\ \n")
+  }    
+  if (booktabs) {
+    cat("\\toprule", "\n")
+  }
+  
+  
+
   
   max_nchar <- function(x) {
     y <- coalesce(as.character(x), "")
@@ -124,6 +143,64 @@ print_grouped_xtable <- function(dt,
   }
   
   format_widths <- vapply(dt, max_nchar, integer(1L)) + 2L # 1 either side
+  
+  for (j in seq_len(ncol(dt))) {
+    if (j == 1L) {
+      formatC(" &", format_widths[j])
+    } else if (j == ncol(dt)) {
+      cat("&\\\\", " ", "\n")
+    } else {
+      cat(" & ", formatC(formatted_headers[j], width = format_widths[j]))
+    }
+  }
+  
+  if (tab.environment == "longtable") {
+    if (booktabs) {
+      cat("\\midrule", "\n")
+    } else {
+      cat("\\hline", "\n")
+    }
+    # first head
+    cat("\\endfirsthead", "\n")
+    
+    if (!is.null(caption)) {
+      cat("\\caption*{", 
+          "Table ", 
+          if (!is.null(label)) {
+            paste0("\\label{", label, "}")
+          },
+          caption, "}",
+          "\\\\ \n")
+    }
+    cat("\\toprule", "\n")
+    for (j in seq_len(ncol(dt))) {
+      if (j == 1L) {
+        formatC(" &", format_widths[j])
+      } else if (j == ncol(dt)) {
+        cat("&\\\\", " ", "\n")
+      } else {
+        cat(" & ", formatC(formatted_headers[j], width = format_widths[j]))
+      }
+    }
+    if (booktabs) {
+      cat("\\midrule", "\n")
+    } else {
+      cat("\\hline", "\n")
+    }
+    cat("\\endhead", "\n")
+  }
+  
+  
+  
+  if (tab.environment == "longtable") {
+    if (booktabs) {
+      cat("\\bottomrule", "\n")
+    }
+    cat("\\endfoot", "\n")
+  }
+  
+  
+  
   
   for (i in seq_len(nrow(dt))) {
     for (j in seq_len(ncol(dt))) {
@@ -156,7 +233,11 @@ print_grouped_xtable <- function(dt,
          "longtable" = cat("\\end{longtable}"),
          "tabularx"  = cat("\\end{tabularx}"))
   cat("\n")
-  dt
+  # Needs to be invisible if knitting to avoid 
+  # printing the 'asis' output (which will likely
+  # be invalid LaTeX anyway)
+  if_knitting(invisible(dt), dt)
+  
 }
 
 

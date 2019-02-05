@@ -5,14 +5,17 @@
 \title{Print grouped table}
 \usage{
 print_grouped_xtable(dt, group_by = NULL, align = NULL,
-  cast_cols = NULL, vertical_gap = 0.5,
-  vertical_gap_units = "baselineskip", out.file = NULL,
-  overwrite = TRUE, booktabs = TRUE, tab.environment = c("tabular",
-  "tabularx", "longtable"), tabularx.width = "\\\\linewidth",
+  vertical_gap = 0.5, vertical_gap_units = "baselineskip",
+  out.file = NULL, overwrite = TRUE, booktabs = TRUE,
+  tab.environment = c("tabular", "tabularx", "longtable"),
+  tabularx.width = "\\\\linewidth",
   logical_fn = c(`\\\\parbox[c]{0.9\\\\PositionColumnWidth}{\\\\centering\\\\XSolidBold}`
   = FALSE,
   `\\\\parbox[c]{0.9\\\\PositionColumnWidth}{\\\\centering\\\\CheckmarkBold}`
-  = TRUE, ` ` = NA))
+  = TRUE, ` ` = NA),
+  column_format = getOption("xtable.sanitize.colnames.function",
+  function(x) sprintf("\\\\textbf{\%s}", x)), caption = NULL,
+  label = NULL)
 }
 \arguments{
 \item{dt}{A \code{data.table} or coercible to such.}
@@ -20,8 +23,6 @@ print_grouped_xtable(dt, group_by = NULL, align = NULL,
 \item{group_by}{The columns that identify groups. If \code{NULL}, the default, any columns with duplicate entries are used.}
 
 \item{align}{The character vector passed to \code{xtable}.}
-
-\item{cast_cols}{Which elements should be casted to form grouped \code{xtable}s?}
 
 \item{vertical_gap}{A nominal numeric value for the narrowest vertical gap.}
 
@@ -38,6 +39,9 @@ print_grouped_xtable(dt, group_by = NULL, align = NULL,
 \item{tabularx.width}{If \code{tab.environment = "tabularx"}, what should the total width of the table be (\emph{i.e.} the first argument of \code{tabularx})?}
 
 \item{logical_fn}{How should logical columns be reformatted?}
+
+\item{column_format}{How should column names be formatted? Defaults to the \code{xtable}
+default, or boldface if that option is \code{NULL}.}
 }
 \description{
 Writes a table as a LaTeX \code{tabular} where groups are separated by a vertical space and repeated entries of the same entry are omitted.
