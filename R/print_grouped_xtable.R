@@ -229,12 +229,20 @@ print_grouped_xtable <- function(dt,
       } else if (j < ncol(dt)) {
         cell_char <- coalesce(as.character(cell), "")
         cat(formatC(cell_char, width = format_widths[j]), " &")
-      } else if (j == ncol(dt) &&
-                 # Don't add a newline
-                 i < nrow(dt)) {
-        cat("\\tabularnewline", "\\relax", " ", "\n")
+      } else if (j == ncol(dt)) {
+        # Don't add a new row at the end of the table
+        if (i < nrow(dt)) {
+          cat("\\tabularnewline", "\\relax", " ", "\n")
+        } else {
+          cat("\n")
+        }
       }
     }
+  }
+  
+  # With longtable, the bottomrule is allocated by \endfoot
+  if (tab.environment != "longtable") {
+    cat("\\bottomrule\n")
   }
   
   
