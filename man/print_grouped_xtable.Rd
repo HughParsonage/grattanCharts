@@ -15,7 +15,7 @@ print_grouped_xtable(dt, group_by = NULL, align = NULL,
   = TRUE, ` ` = NA),
   column_format = getOption("xtable.sanitize.colnames.function",
   function(x) sprintf("\\\\textbf{\%s}", x)), caption = NULL,
-  label = NULL)
+  label = NULL, no_space_grep = NULL)
 }
 \arguments{
 \item{dt}{A \code{data.table} or coercible to such.}
@@ -42,6 +42,9 @@ print_grouped_xtable(dt, group_by = NULL, align = NULL,
 
 \item{column_format}{How should column names be formatted? Defaults to the \code{xtable}
 default, or boldface if that option is \code{NULL}.}
+
+\item{no_space_grep}{If the value of the group (coerced to character) matches this perl 
+regular expression, no group space is added.}
 }
 \description{
 Writes a table as a LaTeX \code{tabular} where groups are separated by a vertical space and repeated entries of the same entry are omitted.

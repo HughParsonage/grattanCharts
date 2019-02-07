@@ -13,6 +13,8 @@
 #' @param logical_fn How should logical columns be reformatted?
 #' @param column_format How should column names be formatted? Defaults to the \code{xtable}
 #' default, or boldface if that option is \code{NULL}.
+#' @param no_space_grep If the value of the group (coerced to character) matches this perl 
+#' regular expression, no group space is added.
 #' @export print_grouped_xtable
 
 print_grouped_xtable <- function(dt,
@@ -32,7 +34,8 @@ print_grouped_xtable <- function(dt,
                                  column_format = getOption("xtable.sanitize.colnames.function", 
                                                            function(x) sprintf("\\textbf{%s}", x)),
                                  caption = NULL,
-                                 label = NULL) {
+                                 label = NULL,
+                                 no_space_grep = NULL) {
   if (!is.data.table(dt)) {
     dt <- as.data.table(dt)
   }
@@ -104,6 +107,11 @@ print_grouped_xtable <- function(dt,
     }
   }
   dt[, "_VSPACE" := eval(parse(text = "`_VSPACE`")) - min(eval(parse(text = "`_VSPACE`")))]
+  if (!is.null(no_space_grep)) {
+    dt[, "_VSPACE" := rep_len(!grepl(no_space_grep, .BY[[1L]], perl = TRUE), .N) * `_VSPACE`,
+       by = c(group_by)]
+  }
+  
 
   if (!is.null(caption) && tab.environment != "longtable") {
     # longtable captions are within the environment
@@ -146,7 +154,7 @@ print_grouped_xtable <- function(dt,
   
   for (j in seq_len(ncol(dt))) {
     if (j == 1L) {
-      formatC(" &", format_widths[j])
+      cat(" ")
     } else if (j == ncol(dt)) {
       cat("&\\\\", " ", "\n")
     } else {
@@ -175,7 +183,7 @@ print_grouped_xtable <- function(dt,
     cat("\\toprule", "\n")
     for (j in seq_len(ncol(dt))) {
       if (j == 1L) {
-        formatC(" &", format_widths[j])
+        cat(" ")
       } else if (j == ncol(dt)) {
         cat("&\\\\", " ", "\n")
       } else {
@@ -206,7 +214,7 @@ print_grouped_xtable <- function(dt,
     for (j in seq_len(ncol(dt))) {
       cell <- .subset2(dt, j)[[i]]
       if (j == 1L) {
-        VAL <- .subset2(dt[i], "_VSPACE")
+        VAL <- .subset2(dt, "_VSPACE")[i]
         if (VAL > 0 && i > 1L) {
           cat("\\phantom{.} &")
           for (k in seq_len(ncol(dt) - 2L)) {
@@ -221,7 +229,9 @@ print_grouped_xtable <- function(dt,
       } else if (j < ncol(dt)) {
         cell_char <- coalesce(as.character(cell), "")
         cat(formatC(cell_char, width = format_widths[j]), " &")
-      } else if (j == ncol(dt)) {
+      } else if (j == ncol(dt) &&
+                 # Don't add a newline
+                 i < nrow(dt)) {
         cat("\\tabularnewline", "\\relax", " ", "\n")
       }
     }
