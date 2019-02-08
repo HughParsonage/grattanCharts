@@ -71,7 +71,7 @@ print_grouped_xtable <- function(dt,
   # Instead of the above, we collect all the out
   # to write in one call. Otherwise we might (and have)
   # get failures if the connection is patchy
-  out <- character(nrow(DT) * 2)
+  out <- character(nrow(dt) * 2)
   o <- 1L
   cat <- function(...) {
     out[o] <- paste0(..., collapse = "")
@@ -118,9 +118,15 @@ print_grouped_xtable <- function(dt,
          .SDcols = group_by[group_j]]
     }
   }
+  
   dt[, "_VSPACE" := eval(parse(text = "`_VSPACE`")) - min(eval(parse(text = "`_VSPACE`")))]
   if (!is.null(no_space_grep)) {
-    dt[, "_VSPACE" := rep_len(!grepl(no_space_grep, .BY[[1L]], perl = TRUE), .N) * `_VSPACE`,
+    # Use this rather than directly in case there's a column called 'no_space_grep'
+    rep_grep <- function(byx, n, .pattern = no_space_grep) {
+      rep_len(!grepl(.pattern, byx, perl = TRUE), n)
+    }
+    
+    dt[, "_VSPACE" := rep_grep(.BY[[1L]], .N) * eval(parse(text = "`_VSPACE`")),
        by = c(group_by)]
   }
   
