@@ -43,6 +43,8 @@ print_grouped_xtable(dt, group_by = NULL, align = NULL,
 \item{column_format}{How should column names be formatted? Defaults to the \code{xtable}
 default, or boldface if that option is \code{NULL}.}
 
+\item{caption, label}{A caption (placed above) the table and the correponding label.}
+
 \item{no_space_grep}{If the value of the group (coerced to character) matches this perl 
 regular expression, no group space is added.}
 }

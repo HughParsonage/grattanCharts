@@ -13,6 +13,7 @@
 #' @param logical_fn How should logical columns be reformatted?
 #' @param column_format How should column names be formatted? Defaults to the \code{xtable}
 #' default, or boldface if that option is \code{NULL}.
+#' @param caption,label A caption (placed above) the table and the correponding label.
 #' @param no_space_grep If the value of the group (coerced to character) matches this perl 
 #' regular expression, no group space is added.
 #' @export print_grouped_xtable
@@ -67,6 +68,17 @@ print_grouped_xtable <- function(dt,
   }
   
   cat <- function(...) base::cat(..., file = out.file, sep = "", append = TRUE)
+  # Instead of the above, we collect all the out
+  # to write in one call. Otherwise we might (and have)
+  # get failures if the connection is patchy
+  out <- character(nrow(DT) * 2)
+  o <- 1L
+  cat <- function(...) {
+    out[o] <- paste0(..., collapse = "")
+    o <<- o + 1L
+    out <<- out
+  }
+  
   
   dt_orig <- copy(dt)
   
@@ -251,6 +263,19 @@ print_grouped_xtable <- function(dt,
          "longtable" = cat("\\end{longtable}"),
          "tabularx"  = cat("\\end{tabularx}"))
   cat("\n")
+  
+  
+  # we may have trailing newlines which we choose to ignore
+  true_end_of_tbl <- hutilscpp::which_true_onwards(out == "")
+  if (true_end_of_tbl > 2L) { # that is, if there are trailing newlines
+    out <- out[seq_len(true_end_of_tbl - 1L)]
+  } else {
+    # nothing to do, writeLines will add a trailing line
+  }
+  
+  writeLines(paste0(out, collapse = ""), out.file)
+  
+  
   # Needs to be invisible if knitting to avoid 
   # printing the 'asis' output (which will likely
   # be invalid LaTeX anyway)
