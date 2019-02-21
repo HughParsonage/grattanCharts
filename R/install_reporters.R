@@ -4,6 +4,10 @@
 #' @export install_reporters
 
 install_reporters <- function() {
+  if (!requireNamespace("devtools", quietly = TRUE)) {
+    stop("`devtools` is not a strict dependency of 'grattanCharts', ",
+         "but is required for `install_reporters()`.")
+  }
   devtools::install_github("hughparsonage/ReporteRsjars")
   devtools::install_github("hughparsonage/ReporteRs")
 }

@@ -10,6 +10,7 @@ col.4 <- "#D4582A" # Ochre
 col.5 <- "#A02226" # Maroon
 col.6 <- "#621214" # brown
 
+
 pal.1 <- col.3
 pal.2 <- c(col.4, col.2)
 pal.2dark <- c(col.5, col.3)

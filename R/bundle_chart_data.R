@@ -6,6 +6,10 @@
 
 bundle_chart_data <- function(chart_data_table,
                               chart_data.xlsx = "atlas/bundled-chart-data.xlsx") {
+  if (!requireNamespace("xlsx", quietly = TRUE)) {
+    stop("`xlsx` is not a strict dependency of 'grattanCharts', but is required ",
+         "for `bundle_chart_data()`.")
+  }
   stopifnot("extract" %in% names(chart_data_table))
   
   wb <- xlsx::createWorkbook()

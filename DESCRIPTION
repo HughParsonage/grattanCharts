@@ -12,7 +12,6 @@ Imports:
     grDevices,
     grid,
     ggplot2 (>= 2.2.0),
-    devtools,
     data.table (>= 1.9.8),
     jsonlite,
     magrittr,
@@ -20,9 +19,9 @@ Imports:
     hutilscpp,
     knitr,
     utils,
-    xlsx,
     xtable
 RoxygenNote: 6.1.1
+Encoding: UTF-8
 LazyData: true
 VignetteBuilder: knitr
 Remotes:
@@ -31,11 +30,14 @@ Remotes:
 Suggests: 
     testthat,
     grattan,
+    devtools,
     scales,
     sysfonts,
     showtextdb,
     ReporteRs,
+    ReporteRsjars,
     rstudioapi,
     showtext,
     officer,
-    rmarkdown
+    rmarkdown,
+    xlsx
